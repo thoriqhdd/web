@@ -196,8 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
         quranSlider.addEventListener('pointerleave', () => endDrag());
     }
 
-    // 4. Countdown Timer to 20 June 2026
-    const targetDate = new Date("June 20, 2026 08:00:00").getTime();
+    // 4. Countdown Timer to 20 June 2026 08:00 WIB (UTC+7)
+    const targetDate = new Date("2026-06-20T08:00:00+07:00").getTime();
 
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
