@@ -509,7 +509,8 @@ body:not(.cover-active) #bg-video {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Complete seamless fullscreen cover */
+  object-fit: cover;
+  /* Complete seamless fullscreen cover */
 }
 
 .slide-faded-video {
