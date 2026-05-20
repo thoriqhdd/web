@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Pernikahan Thoriq & April</title>
+  <meta name="description" content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - 20 Juni 2026, Gedung Aula SMKN 26 Jakarta.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Audio element for background music -->
+  <audio id="bg-music" loop>
+    <source src="Foto Background/Backsound.MP3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <!-- Background Video (fixed behind content, paused on load) -->
+  <div class="video-container" id="video-container">
+    <video id="bg-video" muted playsinline preload="auto" poster="Foto Pasangan/MONO0357-Edit.jpg">
+      <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <section id="cover" class="cover-section">
+    <div class="cover-grid">
+      <div class="cover-slideshow">
+        <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1" class="slide-img active">
+        <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2" class="slide-img">
+        <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3" class="slide-img">
+      </div>
+      <div class="cover-card">
+        <div class="cover-content">
+          <div class="cover-header">
+            <p class="cover-subtitle">The Wedding Of</p>
+            <h1 class="cover-title">Thoriq & April</h1>
+          </div>
+          <div class="cover-footer">
+            <p class="cover-invite-label">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+            <h2 id="guest-name" class="cover-guest-name">Nama Tamu</h2>
+            <button id="btn-buka-undangan" class="btn-primary btn-cover">
+              <i class="fas fa-envelope-open-text"></i> Buka Undangan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content (Hidden initially, scrollable) -->
+  <main id="main-content" class="hidden">
+    
+    <!-- Slide 1: Spacer to show the full video playing -->
+    <section class="slide slide-hero">
+      <video id="hero-video" autoplay muted playsinline preload="metadata" class="hero-video">
+        <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <!-- Slide 2: QS Ar Rum -->
+    <section class="slide slide-soft">
+      <div class="content-box quran-section">
+        <div class="quran-photo-slider">
+          <div class="quran-photo-track">
+            <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1">
+            <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2">
+            <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3">
+            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4">
+            <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Pasangan 5">
+            <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Pasangan 6">
+            <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Pasangan 7">
+            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8">
+            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9">
+            <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Pasangan 10">
+            <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1">
+            <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2">
+            <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3">
+            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4">
+            <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Pasangan 5">
+            <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Pasangan 6">
+            <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Pasangan 7">
+            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8">
+            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9">
+            <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Pasangan 10">
+          </div>
+        </div>
+        <h2 class="quran-title section-title">We Found Love</h2>
+        <p class="quran-text">
+          "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."
+        </p>
+        <p>(QS Ar-Rum 21)</p>
+      </div>
+    </section>
+
+    <!-- Slide 3: Bride & Groom (Faded background) -->
+    <section class="slide slide-faded-video section-with-background mempelai-slide">
+      <div class="overlay-dark"></div>
+      <div class="content-box z-index-1">
+        <h2 class="section-title section-title--mempelai">Mempelai</h2>
+        
+        <div class="profile groom">
+          <img src="Foto Pria/Pria1.jpg" alt="Groom" class="profile-img">
+          <h3 class="profile-name">Thoriq</h3>
+          <p class="profile-desc">Muhammad Thoriq Hadad, S.Pd<br>Anak kedua dari H. Mar'ih HM, M.Pd.I & Hj. Amyati</p>
+          <a href="https://instagram.com/Thoriqhdd" target="_blank" class="btn-ig"><i class="fab fa-instagram"></i> @Thoriqhdd</a>
+        </div>
+
+        <div class="profile bride mt-4">
+          <img src="Foto Wanita/Wanita1.jpg" alt="Bride" class="profile-img">
+          <h3 class="profile-name">April</h3>
+          <p class="profile-desc">Annisa Apriliani, S.Pd<br>Anak ketiga dari Bpk. Herman (Alm) & Ros Pandan</p>
+          <a href="https://instagram.com/annisaaprill_" target="_blank" class="btn-ig"><i class="fab fa-instagram"></i> @annisaaprill_</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Save The Date & Countdown -->
+    <section class="slide slide-soft">
+      <div class="content-box text-center">
+        <div class="fading-images" id="fading-images">
+          <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Fading 1" class="fade-img active">
+          <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Fading 2" class="fade-img">
+          <img src="Foto Pasangan/MONO0372-Edit.jpg" alt="Fading 3" class="fade-img">
+        </div>
+        
+        <h2 class="section-title mt-4">Save The Date</h2>
+        
+        <div class="countdown-container mt-2">
+          <div class="countdown-item"><span id="days">00</span><small>Hari</small></div>
+          <div class="countdown-item"><span id="hours">00</span><small>Jam</small></div>
+          <div class="countdown-item"><span id="minutes">00</span><small>Menit</small></div>
+          <div class="countdown-item"><span id="seconds">00</span><small>Detik</small></div>
+        </div>
+        
+        <p class="date-text mt-3">20 Juni 2026 | 08:00 WIB</p>
+        
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Undangan+Pernikahan+Muhammad+Thoriq+Hadad+%26+Annisa+Apriliani&dates=20260620T010000Z/20260620T090000Z&details=Acara+Pernikahan+Muhammad+Thoriq+Hadad+%26+Annisa+Apriliani+di+Gedung+Aula+SMKN+26+Jakarta&location=Gedung+Aula+SMKN+26+Jakarta" target="_blank" class="btn-primary mt-2">
+          <i class="far fa-calendar-alt"></i> Tambahkan ke Kalender
+        </a>
+      </div>
+    </section>
+
+    <!-- Slide 5: Events -->
+    <section class="slide slide-soft">
+      <div class="content-box" style="width: 100%;">
+        <div class="event-card event-akad">
+          <div class="event-overlay"></div>
+          <div class="event-content">
+            <h3 class="event-title">Akad</h3>
+            <p class="event-date">Sabtu, 20 Juni 2026</p>
+            <p class="event-time"><i class="far fa-clock"></i> 08:00 - 10:00 WIB</p>
+            <p class="event-location"><i class="fas fa-map-marker-alt"></i> Gedung Aula SMKN 26 Jakarta</p>
+            <p class="event-location">Jl. Balai Pustaka Baru I No.2 RT 02/07, Rawamangun, Kec. Pulo Gadung, Jakarta Timur</p>
+            <a href="https://maps.app.goo.gl/GcknSYQX7T4ZBWf6A" target="_blank" class="btn-primary btn-small mt-2"><i class="fas fa-map"></i> Lihat di Maps</a>
+          </div>
+        </div>
+
+        <div class="event-card event-resepsi mt-4">
+          <div class="event-overlay"></div>
+          <div class="event-content">
+            <h3 class="event-title">Resepsi</h3>
+            <p class="event-date">Sabtu, 20 Juni 2026</p>
+            <p class="event-time"><i class="far fa-clock"></i> 11:00 - 16:00 WIB</p>
+            <p class="event-location"><i class="fas fa-map-marker-alt"></i> Gedung Aula SMKN 26 Jakarta</p>
+            <p class="event-location">Jl. Balai Pustaka Baru I No.2 RT 02/07, Rawamangun, Kec. Pulo Gadung, Jakarta Timur</p>
+            <a href="https://maps.app.goo.gl/GcknSYQX7T4ZBWf6A" target="_blank" class="btn-primary btn-small mt-2"><i class="fas fa-map"></i> Lihat di Maps</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Gallery -->
+    <section class="slide slide-faded-video section-with-background gallery-slide">
+      <div class="overlay-dark"></div>
+      <div class="content-box z-index-1 gallery-content" style="width: 100%;">
+        <h2 class="section-title section-title--gallery">Our Gallery</h2>
+        <div class="gallery-grid">
+          <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Gallery 1">
+          <img src="Foto Pasangan/MONO0375-Edit.jpg" alt="Gallery 2">
+          <img src="Foto Pasangan/MONO0377-Edit.jpg" alt="Gallery 3">
+          <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Gallery 4">
+          <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Gallery 5">
+          <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Gallery 6">
+          <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Gallery 7">
+          <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Gallery 8">
+          <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Gallery 9">
+          <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Gallery 10">
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Love Story -->
+    <section class="slide slide-soft">
+      <div class="content-box">
+        <h2 class="section-title">Love Story</h2>
+        
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Pertama Bertemu</h4>
+              <p class="timeline-date">Bangku Kuliah</p>
+              <p>Di sebuah kampus yang sama, dalam ruang kelas yang sama, semesta mempertemukan kami tanpa banyak kata. Saat itu, kami hanyalah dua orang yang sibuk mengejar mimpi masing-masing. April tenggelam dalam aktivitas organisasi BEM yang penuh semangat, sementara Thoriq sibuk di organisasi Sepakbolanya. Meski sama-sama pernah berada di BEM, Thoriq lebih sering “menghilang” daripada hadir di kumpul organisasi, hehe.</p>
+              <p>Hari-hari berlalu begitu saja. Percakapan kami hanya sebatas tugas kuliah, jadwal kelas, dan hal-hal sederhana tentang perkuliahan. Tidak ada yang istimewa, belum ada cerita yang berarti. Namun siapa sangka, dari pertemuan sederhana itu, semesta ternyata sedang menuliskan awal perjalanan kami.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Melanjutkan Skripsi Bersama</h4>
+              <p class="timeline-date">Akhir Masa Kuliah</p>
+              <p>Menjelang akhir masa kuliah, kami dipertemukan kembali dalam perjuangan yang sama: menyelesaikan skripsi yang sempat terhenti karena pandemi Covid-19. Di tengah rasa lelah dan ketidakpastian, kami kembali duduk bersama dalam ruang bimbingan, ditemani teman-teman lain yang juga sedang berjuang menyelesaikan langkah terakhir mereka sebagai mahasiswa.</p>
+              <p>Saat itu, tujuan kami sederhana—ingin lulus dan menyambut masa depan yang telah direncanakan. Namun tanpa disadari, dari proses yang penuh tekanan itu, kami mulai saling mengenal lebih dalam. Thoriq kagum pada sosok April yang kuat dan penuh kerja keras. Sementara April melihat ketekunan Thoriq yang tidak mudah menyerah. Kami saling bertukar pikiran, saling menyemangati, dan perlahan menjadi tempat pulang di tengah lelahnya perjuangan.</p>
+              <p>Ternyata, skripsi bukan hanya tentang menyelesaikan pendidikan. Ia juga menjadi jalan yang mempertemukan dua hati dalam satu tujuan.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Menuju Ikatan Suci</h4>
+              <p class="timeline-date">Selesai Sidang Skripsi</p>
+              <p>Di tengah perjalanan yang penuh perjuangan itu, tanpa kami sadari, langkah kami mulai berjalan beriringan. Kesibukan, tekanan, dan proses panjang yang kami lalui bersama perlahan menghadirkan rasa yang tak pernah direncanakan sebelumnya.</p>
+              <p>April menjadi sosok yang kuat dan selalu bertahan dalam keadaan apa pun. Keteguhan itu diam-diam membuat Thoriq jatuh kagum. Dukungan-dugaan kecil yang diberikan April, tanpa ia sadari, menjadi alasan bagi Thoriq untuk terus melangkah hingga mencapai garis akhir.</p>
+              <p>Hingga pada satu momen, Thoriq menyadari satu hal—bahwa ada seseorang yang tak boleh hilang dalam hidupnya. Perasaan yang selama ini tumbuh dalam diam akhirnya menemukan jalannya untuk terungkap. Dan dari perjalanan sederhana yang dimulai di bangku kuliah, kami menemukan tujuan yang sama: melangkah bersama dalam ikatan suci, untuk saling menjaga, mendampingi, dan mencintai seumur hidup.</p>
+              <p class="hashtag">#FromSkripsiToSah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Wedding Gift -->
+    <section class="slide slide-faded-video section-with-background gift-slide">
+      <div class="overlay-dark"></div>
+      <div class="content-box z-index-1 gift-content" style="width: 100%;">
+        <h2 class="section-title section-title--gift">Wedding Gift</h2>
+        <p class="section-subtitle text-light">Doa restu Anda adalah hadiah terindah bagi kami. Jika ingin memberi, silakan gunakan cashless atau amplop digital dengan penuh keberkahan.</p>
+        <p class="text-center text-light"><strong>No. Konfirmasi:</strong> 085183316016</p>
+
+        <div class="bank-card">
+          <h4>Mandiri</h4>
+          <p class="account-number" id="rek-mandiri">60010657116</p>
+          <p class="account-name">a.n Muhammad Thoriq Hadad</p>
+          <button class="btn-copy" onclick="copyRekening('rek-mandiri')"><i class="far fa-copy"></i> Salin Rekening</button>
+        </div>
+        
+        <div class="bank-card mt-3">
+          <h4>BCA</h4>
+          <p class="account-number" id="rek-bca">7635605227</p>
+          <p class="account-name">a.n Annisa Apriliani</p>
+          <button class="btn-copy" onclick="copyRekening('rek-bca')"><i class="far fa-copy"></i> Salin Rekening</button>
+        </div>
+
+        <p class="text-center text-light mt-3"><strong>Alamat Kirim Kado:</strong> Segera diupdate</p>
+        <p class="text-center text-light mt-2"><strong>Musik Backsound:</strong> https://www.youtube.com/watch?v=g3ON3-PUIek&list=RDg3ON3-PUIek&start_radio=1</p>
+        <p class="text-center text-light mt-1"><strong>Catatan:</strong> -</p>
+      </div>
+    </section>
+
+    <!-- Slide 9: Wishes -->
+    <section class="slide slide-soft">
+      <div class="content-box" style="width: 100%;">
+        <h2 class="section-title">Wishes & RSVP</h2>
+        
+        <form id="wishes-form" class="wishes-form">
+          <input type="text" id="wish-name" placeholder="Nama Anda" required class="form-input">
+          <textarea id="wish-text" rows="4" placeholder="Berikan ucapan dan doa..." required class="form-input"></textarea>
+          <select id="wish-attendance" class="form-input">
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+            <option value="Masih Ragu">Masih Ragu</option>
+          </select>
+          <button type="submit" class="btn-primary w-100"><i class="fas fa-paper-plane"></i> Kirim Ucapan</button>
+        </form>
+        
+        <div class="wishes-list" id="wishes-list">
+          <div class="wish-item">
+            <strong>Budi</strong> <span class="badge badge-hadir">Hadir</span>
+            <p>Selamat menempuh hidup baru Thoriq dan April! Semoga samawa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: Thank You -->
+    <section class="slide slide-thankyou">
+      <div class="overlay-darker"></div>
+      <div class="content-box text-center z-index-1">
+        <h2 class="thankyou-text">Terima Kasih</h2>
+        <p class="text-light">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+        <h1 class="couple-names-footer mt-4">Thoriq & April</h1>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

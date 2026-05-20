@@ -1,0 +1,1084 @@
+/* style.css */
+:root {
+  --primary-color: #8C7A6B; /* Soft brownish/gold */
+  --soft-bg: #F9F6F0; /* Soft cream/beige */
+  --text-dark: #333333;
+  --text-light: #F4F4F4;
+  --overlay-dark: rgba(0, 0, 0, 0.6);
+  --overlay-darker: rgba(0, 0, 0, 0.7);
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background-color: #000; /* Behind everything */
+  overflow: hidden; /* Locked initially */
+  scroll-behavior: smooth;
+}
+
+/* Typography Classes */
+.text-center { text-align: center; }
+.text-light { color: var(--text-light); }
+.mt-2 { margin-top: 10px; }
+.mt-3 { margin-top: 15px; }
+.mt-4 { margin-top: 20px; }
+.mb-3 { margin-bottom: 15px; }
+.w-100 { width: 100%; }
+.z-index-1 { position: relative; z-index: 1; }
+
+/* Video Background */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+}
+
+#bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+  transition: filter 0.5s ease;
+}
+
+body:not(.cover-active) #bg-video {
+  filter: brightness(1);
+}
+
+.slide-hero {
+  height: 100vh;
+}
+
+.video-overlay {
+  display: none;
+}
+
+/* Cover Section */
+.cover-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  min-height: 100vh;
+  background-color: #000;
+  background-image: url('Foto Background/Frame1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: center;
+  gap: 30px;
+  width: min(1200px, 100%);
+  padding: 20px;
+}
+
+.cover-frame {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 25px 75px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.05);
+}
+
+.cover-frame-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cover-card {
+  width: 100%;
+  max-width: 420px;
+  min-height: 85vh;
+  height: 88vh;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 30px;
+  backdrop-filter: blur(20px);
+  padding: 24px 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cover-content {
+  text-align: center;
+  color: var(--text-light);
+  animation: fadeIn 2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  gap: 18px;
+}
+
+.cover-header,
+.cover-footer {
+  width: 100%;
+}
+
+.cover-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.cover-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.cover-invite-label {
+  font-size: 0.75rem;
+  opacity: 0.95;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cover-guest-name {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+}
+
+.cover-content h2.cover-guest-name {
+  font-size: 0.75rem;
+  margin-bottom: 12px;
+}
+
+.cover-content h2 {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  line-height: 1.05;
+  margin-bottom: 30px;
+}
+
+.cover-card .btn-primary {
+  width: 100%;
+  padding: 16px 0;
+}
+
+.cover-section.slide-up {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+.the-wedding-of {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.couple-names-cover {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.guest-info {
+  margin-bottom: 40px;
+}
+
+.guest-info p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.guest-info h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 15px;
+}
+
+.cover-note {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-text {
+  max-width: 720px;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  opacity: 0.85;
+  margin-bottom: 15px;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  line-height: 1.1;
+}
+
+.timeline-date {
+  font-size: 0.88rem;
+  color: rgba(0,0,0,0.65);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.hashtag {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 12px;
+  color: var(--primary-color);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.22);
+}
+
+.btn-primary:hover {
+  background-color: #736355;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.22);
+}
+
+.btn-primary.btn-cover {
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  border-radius: 999px;
+  letter-spacing: 0.6px;
+  background: rgba(255,255,255,0.95);
+  color: #4a3325;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.16);
+}
+
+.btn-primary.btn-cover:hover {
+  background: white;
+}
+
+.btn-small {
+  padding: 8px 15px;
+  font-size: 0.85rem;
+}
+
+.btn-ig {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 15px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.btn-copy {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+/* Main Content */
+.hidden {
+  display: none !important;
+}
+
+/* The first slide is empty to show the video behind */
+.slide-hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* General Slide Styling */
+.slide {
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.slide-soft {
+  background-color: var(--soft-bg);
+}
+
+.slide-faded-video {
+  /* This relies on the global video container, but needs its own background overlay */
+  background: transparent;
+  color: var(--text-light);
+  position: relative;
+}
+
+.section-with-background {
+  background-image: url('Foto Background/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.section-with-background .content-box {
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+
+.mempelai-slide {
+  background-image: url('Foto Background/Background.png');
+}
+
+.gift-slide {
+  background-image: url('Foto Background/Background.png');
+}
+
+.gallery-slide {
+  background-image: url('Foto Background/Background.png');
+}
+
+.overlay-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55); /* Faded contrast for readability */
+}
+.overlay-darker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.content-box {
+  max-width: 500px;
+  width: 100%;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content-box.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform-origin: center bottom;
+}
+
+.content-box.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: popUpBounce 0.8s ease;
+}
+
+/* Image Elements */
+.rounded-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid white;
+}
+
+.quran-photo-slider {
+  width: calc(100% + 36px);
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 28px;
+  margin-left: -18px;
+}
+
+.quran-photo-track {
+  display: flex;
+  gap: 18px;
+  padding: 18px;
+  will-change: transform;
+  animation: quran-slide 18s linear infinite;
+  min-width: max-content;
+}
+
+.quran-photo-track img {
+  flex: 0 0 220px;
+  height: 220px;
+  border-radius: 28px;
+  object-fit: cover;
+  border: none;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.18);
+}
+
+@keyframes quran-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 18px)); }
+}
+
+.quran-section {
+  position: relative;
+  z-index: 1;
+}
+
+.quran-section::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 240px;
+  background: rgba(255,255,255,0.14);
+  border-radius: 50%;
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.quran-section .quran-title,
+.quran-section .quran-text,
+.quran-section p:last-child {
+  position: relative;
+  z-index: 2;
+}
+
+.quran-title {
+  position: relative;
+}
+
+.quran-title::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -40%);
+  width: 260px;
+  height: 68px;
+  border-radius: 999px;
+  background: rgba(140, 122, 107, 0.14);
+  z-index: -1;
+}
+
+.shadow {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Text */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  color: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--primary-color);
+  margin: 18px auto 0;
+}
+
+.quran-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  color: var(--primary-color);
+  text-transform: none;
+}
+
+.quran-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(51, 51, 51, 0.92);
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+.section-title--mempelai {
+  font-size: 3rem;
+  letter-spacing: 0.24em;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.section-title--gift {
+  font-size: 3rem;
+  letter-spacing: 0.22em;
+  background: linear-gradient(90deg, #ffe6c7, #c19d80);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 3px 18px rgba(0,0,0,0.25);
+}
+
+.section-title--gallery {
+  font-size: 2.8rem;
+  letter-spacing: 0.16em;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.slide-soft .section-title {
+  color: var(--primary-color);
+}
+
+/* Profiles */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.5);
+  margin-bottom: 10px;
+}
+.profile-name {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+.profile-desc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Fading Images */
+.fading-images {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.fade-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.fade-img.active {
+  opacity: 1;
+}
+
+/* Countdown */
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.countdown-item {
+  background: white;
+  color: var(--primary-color);
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.countdown-item span {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.countdown-item small {
+  font-size: 0.7rem;
+}
+.date-text {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Events */
+.event-card {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 30px 20px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  background-image: url('Foto Background/Background.png');
+  background-size: cover;
+  background-position: center;
+}
+.event-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+}
+.event-content {
+  position: relative;
+  z-index: 1;
+}
+.event-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+.event-date {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+.event-time, .event-location {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 12px;
+  grid-auto-rows: 180px;
+  width: 100%;
+}
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+.gallery-grid img:nth-child(1),
+.gallery-grid img:nth-child(5) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-grid img:nth-child(3) {
+  grid-column: span 2;
+}
+.gallery-grid img:nth-child(8) {
+  grid-column: span 2;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--primary-color);
+  text-align: left;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+.timeline-dot {
+  position: absolute;
+  left: -27px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-color);
+  border-radius: 50%;
+}
+.timeline-content h4 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+.timeline-content p {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+/* Gifts */
+.bank-card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(5px);
+  width: 100%;
+}
+.account-number {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+
+/* Wishes */
+.wishes-form {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.form-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: var(--font-body);
+}
+.wishes-list {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  text-align: left;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+.wish-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.wish-item:last-child {
+  border-bottom: none;
+}
+.badge {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 10px;
+  color: white;
+  margin-left: 5px;
+}
+.badge-hadir { background: #4CAF50; }
+.badge-tidak-hadir { background: #F44336; }
+.badge-ragu { background: #FF9800; }
+
+/* Thank You */
+.slide-thankyou {
+  background-image: url('Foto Background/Background.png');
+  background-size: cover;
+  background-position: center;
+}
+.thankyou-text {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 15px;
+}
+.couple-names-footer {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: white;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .cover-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    min-height: 100vh;
+    align-items: center;
+  }
+  .cover-frame,
+  .cover-slideshow {
+    display: none;
+  }
+  .cover-card {
+    padding: 25px;
+    max-width: 100%;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    height: auto;
+    background: rgba(255,255,255,0.18);
+  }
+  .cover-content {
+    padding: 18px;
+  }
+  .cover-header {
+    position: relative;
+    width: 100%;
+    min-height: 160px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-header::before {
+    display: none;
+  }
+  .cover-header > * {
+    position: relative;
+    z-index: 1;
+  }
+  .cover-subtitle,
+  .cover-title,
+  .cover-invite-label,
+  .cover-guest-name {
+    color: white;
+  }
+  .cover-subtitle {
+    font-size: 0.65rem;
+  }
+  .cover-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: auto;
+    padding-bottom: 18px;
+  }
+  .cover-title {
+    font-size: 1.25rem;
+  }
+  .cover-invite-label {
+    font-size: 0.75rem;
+  }
+  .cover-guest-name {
+    font-size: 0.75rem;
+  }
+  .btn-primary.btn-cover {
+    padding: 8px 20px;
+    font-size: 0.82rem;
+  }
+  .the-wedding-of {
+    font-size: 1.3rem;
+  }
+  .couple-names-cover {
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+  }
+  .guest-info h2 {
+    font-size: 1.3rem;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .slide {
+    padding: 40px 16px;
+    min-height: auto;
+  }
+  .content-box {
+    padding: 24px 18px;
+  }
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+  .fading-images {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+  }
+  .countdown-container {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .countdown-item {
+    width: 55px;
+    height: 55px;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    padding-left: 16px;
+  }
+  .event-card {
+    padding: 25px 18px;
+  }
+  .wishes-form {
+    padding: 18px;
+  }
+  .btn-primary {
+    width: 100%;
+    padding: 14px 0;
+  }
+  .cover-note {
+    max-width: 100%;
+  }
+  .quran-photo-slider {
+    max-width: none;
+    width: 100%;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .quran-photo-track {
+    gap: 14px;
+    padding: 12px;
+    animation-duration: 10s;
+  }
+  .quran-photo-track img {
+    flex: 0 0 180px;
+    height: 180px;
+    border-radius: 22px;
+    border: none;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+  }
+}
+
+@media (max-width: 600px) {
+  .couple-names-cover {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  .section-title {
+    font-size: 1.75rem;
+  }
+  .countdown-item {
+    width: 50px;
+    height: 50px;
+  }
+  .gallery-grid img {
+    height: 130px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+  }
+  75% {
+    transform: translateY(4px) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Scroll Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px) scale(0.98);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform-origin: center bottom;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: popUpBounce 0.8s ease;
+}
