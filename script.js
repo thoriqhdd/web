@@ -14,9 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainContent = document.getElementById('main-content');
     const bgMusic = document.getElementById('bg-music');
     const bgVideo = document.getElementById('bg-video');
+    const musicToggle = document.getElementById('music-toggle');
 
     // Keep cover state active on load to darken the background video
     document.body.classList.add('cover-active');
+    document.body.style.overflow = 'hidden';
 
     // Ensure video is loaded but paused on page load so it's visible
     const showBgFrame = () => {
@@ -43,7 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Play music
         bgMusic.load();
-        bgMusic.play().catch(error => console.log("Audio play failed: ", error));
+        bgMusic.play().then(() => {
+            musicToggle.classList.add('playing');
+        }).catch(error => console.log("Audio play failed: ", error));
         
         // Ensure video is playing (user gesture)
         if (bgVideo) {
@@ -54,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove('cover-active');
         setTimeout(() => {
             coverSection.style.display = 'none';
+            AOS.refresh();
         }, 1000);
     });
 
@@ -61,6 +66,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (heroVideo) {
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
+        });
+    }
+
+    // Music play/pause toggle
+    if (musicToggle && bgMusic) {
+        musicToggle.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    musicToggle.classList.add('playing');
+                }).catch(err => console.log(err));
+            } else {
+                bgMusic.pause();
+                musicToggle.classList.remove('playing');
+            }
         });
     }
 
@@ -96,12 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let dragStartOffset = 0;
         let currentOffset = 0;
         let lastTimestamp = null;
-        const speed = 6; // pixels per second, slow movement
-
-        const updateTrack = (offset) => {
-            currentOffset = offset;
-            quranTrack.style.transform = `translateX(${currentOffset}px)`;
-        };
+        const speed = 25; // slower continuous movement pixels per second
 
         const clampOffset = () => {
             const totalWidth = quranTrack.scrollWidth;
@@ -192,25 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
-    // 5. Scroll Reveal Animation
-    const reveals = document.querySelectorAll('.slide .content-box');
-    
-    const revealOnScroll = () => {
-        const windowHeight = window.innerHeight;
-        const elementVisible = 150;
-        
-        reveals.forEach(reveal => {
-            const elementTop = reveal.getBoundingClientRect().top;
-            if (elementTop < windowHeight - elementVisible) {
-                reveal.classList.add('active');
-            }
+    // 5. Initialize AOS for Scroll Animations
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            once: true, // animate only once so elements don't disappear on scroll
+            offset: 60,
+            duration: 900,
+            easing: 'ease-out-cubic'
         });
-    };
-    
-    // Add reveal class initially
-    reveals.forEach(r => r.classList.add('reveal'));
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger on load
+    }
 
     // 6. Wishes Form Submission
     const wishesForm = document.getElementById('wishes-form');
@@ -241,6 +245,39 @@ document.addEventListener("DOMContentLoaded", () => {
             // Reset form
             wishesForm.reset();
         });
+    }
+
+    // 7. Particle Generator
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+        const createParticle = () => {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            // Random gold/champagne colors
+            const hues = [35, 45, 50, 40];
+            const hue = hues[Math.floor(Math.random() * hues.length)];
+            particle.style.background = `radial-gradient(circle, hsl(${hue}, 80%, 70%) 0%, hsla(${hue}, 80%, 70%, 0) 70%)`;
+            
+            particle.style.animationDuration = Math.random() * 8 + 8 + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.3;
+            
+            const size = Math.random() * 6 + 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            particlesContainer.appendChild(particle);
+            setTimeout(() => {
+                particle.remove();
+            }, 16000);
+        };
+        
+        // Populate initially
+        for(let i = 0; i < 20; i++) {
+            setTimeout(createParticle, Math.random() * 5000);
+        }
+        setInterval(createParticle, 550);
     }
 });
 
