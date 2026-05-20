@@ -56,9 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
             musicToggle.classList.add('playing');
         }).catch(error => console.log("Audio play failed: ", error));
 
-        // Ensure video is playing (user gesture)
+        // Ensure background video is playing
         if (bgVideo) {
             bgVideo.play().catch(error => console.log("Video play failed: ", error));
+        }
+
+        // Play hero video on first slide from the beginning
+        const heroVideo = document.getElementById('hero-video');
+        if (heroVideo) {
+            heroVideo.currentTime = 0;
+            heroVideo.play().catch(error => console.log("Hero video play failed: ", error));
         }
 
         // Wait for slide up animation then hide cover completely
