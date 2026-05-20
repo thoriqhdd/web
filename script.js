@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnBuka.addEventListener('click', () => {
         // Slide up cover
         coverSection.classList.add('slide-up');
-        
+
         // Show main content and unlock scroll
         mainContent.classList.remove('hidden');
         document.body.style.overflow = 'auto';
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bgMusic.play().then(() => {
             musicToggle.classList.add('playing');
         }).catch(error => console.log("Audio play failed: ", error));
-        
+
         // Ensure video is playing (user gesture)
         if (bgVideo) {
             bgVideo.play().catch(error => console.log("Video play failed: ", error));
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Fading Images (Slide 4)
     const fadeImages = document.querySelectorAll('.fade-img');
     let currentImageIndex = 0;
-    
+
     if (fadeImages.length > 0) {
         setInterval(() => {
             fadeImages[currentImageIndex].classList.remove('active');
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4. Countdown Timer to 20 June 2026
     const targetDate = new Date("June 20, 2026 08:00:00").getTime();
-    
+
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
     const minsEl = document.getElementById('minutes');
@@ -223,14 +223,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (wishesForm) {
         wishesForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('wish-name').value;
             const text = document.getElementById('wish-text').value;
             const attendance = document.getElementById('wish-attendance').value;
-            
+
             let badgeClass = 'badge-hadir';
-            if(attendance === 'Tidak Hadir') badgeClass = 'badge-tidak-hadir';
-            if(attendance === 'Masih Ragu') badgeClass = 'badge-ragu';
+            if (attendance === 'Tidak Hadir') badgeClass = 'badge-tidak-hadir';
+            if (attendance === 'Masih Ragu') badgeClass = 'badge-ragu';
 
             const newWish = document.createElement('div');
             newWish.classList.add('wish-item');
@@ -238,10 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <strong>${name}</strong> <span class="badge ${badgeClass}">${attendance}</span>
                 <p>${text}</p>
             `;
-            
+
             // Add to top of list
             wishesList.insertBefore(newWish, wishesList.firstChild);
-            
+
             // Reset form
             wishesForm.reset();
         });
@@ -254,27 +254,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             particle.style.left = Math.random() * 100 + 'vw';
-            
+
             // Random gold/champagne colors
             const hues = [35, 45, 50, 40];
             const hue = hues[Math.floor(Math.random() * hues.length)];
             particle.style.background = `radial-gradient(circle, hsl(${hue}, 80%, 70%) 0%, hsla(${hue}, 80%, 70%, 0) 70%)`;
-            
+
             particle.style.animationDuration = Math.random() * 8 + 8 + 's';
             particle.style.opacity = Math.random() * 0.5 + 0.3;
-            
+
             const size = Math.random() * 6 + 3;
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
-            
+
             particlesContainer.appendChild(particle);
             setTimeout(() => {
                 particle.remove();
             }, 16000);
         };
-        
+
         // Populate initially
-        for(let i = 0; i < 20; i++) {
+        for (let i = 0; i < 20; i++) {
             setTimeout(createParticle, Math.random() * 5000);
         }
         setInterval(createParticle, 550);
