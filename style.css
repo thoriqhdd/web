@@ -497,43 +497,35 @@ body:not(.cover-active) #bg-video {
 }
 
 .quran-photo-slider {
-  width: calc(100% + 36px);
-  max-width: 100%;
+  width: 100%;
   overflow: hidden;
-  border-radius: 0;
+  border-radius: 20px;
   background: transparent;
   border: none;
   box-shadow: none;
-  margin-bottom: 28px;
-  margin-left: -18px;
+  margin-bottom: 35px;
 }
 
 .quran-photo-track {
   display: flex;
-  gap: 18px;
-  padding: 18px;
+  gap: 20px;
+  padding: 10px 0;
   will-change: transform;
-  animation: quran-slide 30s linear infinite;
   min-width: max-content;
 }
 
 .quran-photo-track img {
-  flex: 0 0 220px;
+  flex: 0 0 160px;
   height: 220px;
-  border-radius: 28px;
+  border-radius: 20px;
   object-fit: cover;
-  border: none;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(163, 138, 117, 0.25);
+  box-shadow: 0 10px 25px rgba(163, 138, 117, 0.15);
+  transition: transform 0.4s ease;
 }
 
-@keyframes quran-slide {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-50% - 18px));
-  }
+.quran-photo-track img:hover {
+  transform: scale(1.05);
 }
 
 .quran-section {
@@ -1129,27 +1121,25 @@ body:not(.cover-active) #bg-video {
   }
 
   .quran-photo-slider {
-    max-width: none;
     width: 100%;
     border: none;
     background: transparent;
     box-shadow: none;
-    border-radius: 0;
+    border-radius: 20px;
     padding: 0;
   }
 
   .quran-photo-track {
     gap: 14px;
-    padding: 12px;
-    animation-duration: 10s;
+    padding: 10px 0;
   }
 
   .quran-photo-track img {
-    flex: 0 0 180px;
+    flex: 0 0 140px;
     height: 180px;
-    border-radius: 22px;
-    border: none;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    border-radius: 20px;
+    border: 1px solid rgba(163, 138, 117, 0.25);
+    box-shadow: 0 8px 20px rgba(163, 138, 117, 0.15);
   }
 }
 

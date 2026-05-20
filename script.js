@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let dragStartOffset = 0;
         let currentOffset = 0;
         let lastTimestamp = null;
-        const speed = 25; // slower continuous movement pixels per second
+        const speed = 12; // slow, beautiful, cinematic movement (12px per second)
 
         const clampOffset = () => {
             const totalWidth = quranTrack.scrollWidth;
