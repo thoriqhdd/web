@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         bgMusic.load();
         bgMusic.play().then(() => {
             musicToggle.classList.add('playing');
+            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
         }).catch(error => console.log("Audio play failed: ", error));
 
         // Ensure background video is playing
@@ -83,16 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Music play/pause toggle
+    // Music play/pause (mute/unmute) toggle
     if (musicToggle && bgMusic) {
         musicToggle.addEventListener('click', () => {
             if (bgMusic.paused) {
                 bgMusic.play().then(() => {
                     musicToggle.classList.add('playing');
+                    musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
                 }).catch(err => console.log(err));
             } else {
                 bgMusic.pause();
                 musicToggle.classList.remove('playing');
+                musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
         });
     }
