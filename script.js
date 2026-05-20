@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgVideo = document.getElementById('bg-video');
     const musicToggle = document.getElementById('music-toggle');
 
-    // Keep cover state active on load to darken the background video
+    // Keep cover state active on load to darken the background video, lock scroll completely
     document.body.classList.add('cover-active');
-    document.body.style.overflow = 'hidden';
+    document.documentElement.classList.add('scroll-locked');
+    document.body.classList.add('scroll-locked');
 
     // Ensure video is loaded but paused on page load so it's visible
     const showBgFrame = () => {
@@ -41,7 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Show main content and unlock scroll
         mainContent.classList.remove('hidden');
-        document.body.style.overflow = 'auto';
+        document.documentElement.classList.remove('scroll-locked');
+        document.body.classList.remove('scroll-locked');
+        
+        // Refresh AOS immediately to recalculate coordinates of revealed elements
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
 
         // Play music
         bgMusic.load();
