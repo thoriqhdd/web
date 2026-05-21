@@ -173,6 +173,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Start butterflies immediately as background so GIF is visible without waiting
+    // for the hero video to end. This also keeps the background alive while user
+    // scrolls across the site.
+    setTimeout(() => {
+        try { showButterflies(); } catch (e) { /* silent */ }
+    }, 700);
+
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
         heroVideo.addEventListener('ended', () => {
