@@ -45,7 +45,7 @@ html {
   min-height: 100%;
   font-family: var(--font-body);
   color: var(--text-dark);
-  background-color: #0c0b0a;
+  background-color: var(--bg-cream);
   scroll-behavior: smooth;
   line-height: 1.7;
 }
@@ -441,21 +441,21 @@ body:not(.cover-active) #bg-video {
   gap: 8px;
   margin-top: 15px;
   padding: 8px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-light);
+  background: rgba(163, 138, 117, 0.1);
+  color: var(--primary-dark);
   border-radius: 30px;
   text-decoration: none;
   font-family: var(--font-sans);
   font-size: 0.8rem;
   letter-spacing: 1px;
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--primary-light);
   transition: var(--transition);
 }
 
 .btn-ig:hover {
-  background: var(--text-light);
-  color: var(--primary-dark);
+  background: var(--primary-dark);
+  color: var(--text-light);
   transform: translateY(-2px);
 }
 
@@ -518,8 +518,8 @@ body:not(.cover-active) #bg-video {
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;
-  background-color: #0c0b0a;
-  /* dark fallback while video is loading */
+  background-color: var(--bg-cream);
+  /* fallback while video is loading */
 }
 
 .hero-video {
@@ -534,11 +534,11 @@ body:not(.cover-active) #bg-video {
 
 .slide-faded-video {
   background: transparent;
-  color: var(--text-light);
+  color: var(--text-dark);
 }
 
 .section-with-background {
-  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.7), rgba(18, 16, 14, 0.75)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.75), rgba(250, 247, 242, 0.85)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -548,14 +548,14 @@ body:not(.cover-active) #bg-video {
 .overlay-dark {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(250, 247, 242, 0.6);
   z-index: 1;
 }
 
 .overlay-darker {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(250, 247, 242, 0.85);
   z-index: 1;
 }
 
@@ -604,8 +604,8 @@ body:not(.cover-active) #bg-video {
 }
 
 .section-with-background .content-box {
-  background: var(--glass-dark);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-lg);
 }
 
@@ -776,14 +776,14 @@ body:not(.cover-active) #bg-video {
 .profile-name {
   font-family: var(--font-royal);
   font-size: 2.8rem;
-  color: var(--text-light);
+  color: var(--primary-dark);
   margin-bottom: 8px;
 }
 
 .profile-desc {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-muted);
   line-height: 1.6;
   max-width: 85%;
 }
@@ -874,13 +874,13 @@ body:not(.cover-active) #bg-video {
   border-radius: 30px;
   overflow: hidden;
   padding: 40px 30px;
-  color: var(--text-light);
+  color: var(--text-dark);
   box-shadow: var(--shadow-lg);
-  background-image: linear-gradient(135deg, rgba(18, 16, 14, 0.75), rgba(122, 98, 78, 0.4)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(200, 177, 149, 0.45)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(163, 138, 117, 0.25);
   margin-bottom: 30px;
   transition: var(--transition);
 }
@@ -893,7 +893,7 @@ body:not(.cover-active) #bg-video {
 .event-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(250, 247, 242, 0.45);
   z-index: 1;
 }
 
@@ -921,6 +921,7 @@ body:not(.cover-active) #bg-video {
   font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 15px;
+  color: var(--primary-dark);
 }
 
 .event-time,
@@ -1049,10 +1050,10 @@ body:not(.cover-active) #bg-video {
 
 /* Wedding Gift bank cards */
 .bank-card {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.65);
   padding: 30px;
   border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(163, 138, 117, 0.25);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   width: 100%;
@@ -1062,7 +1063,7 @@ body:not(.cover-active) #bg-video {
 }
 
 .bank-card:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.85);
   transform: translateY(-3px);
   border-color: var(--accent);
 }
@@ -1081,13 +1082,13 @@ body:not(.cover-active) #bg-video {
   letter-spacing: 3px;
   margin: 15px 0 5px;
   font-weight: 500;
-  color: var(--text-light);
+  color: var(--primary-dark);
 }
 
 .account-name {
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-muted);
 }
 
 /* Wishes & RSVP Form */
@@ -1178,7 +1179,7 @@ body:not(.cover-active) #bg-video {
 
 /* Thank You Section */
 .slide-thankyou {
-  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.85), rgba(18, 16, 14, 0.9)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.8), rgba(250, 247, 242, 0.85)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1194,7 +1195,15 @@ body:not(.cover-active) #bg-video {
 .couple-names-footer {
   font-family: var(--font-royal);
   font-size: 4.5rem;
-  color: var(--text-light);
+  color: var(--primary-dark);
+}
+
+.gift-slide .section-subtitle.text-light {
+  color: var(--text-muted) !important;
+}
+
+.slide-thankyou .text-light {
+  color: var(--text-dark) !important;
 }
 
 /* Floating Music Toggle */
