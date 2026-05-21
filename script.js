@@ -91,27 +91,54 @@ document.addEventListener("DOMContentLoaded", () => {
         butterfly.alt = '';
         butterfly.setAttribute('aria-hidden', 'true');
 
-        const left = Math.random() * 90;
-        const top = Math.random() * 80;
-        const size = Math.random() * 18 + 32;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 4;
-        const dx = Math.random() * 120 - 60;
-        const dy = Math.random() * 100 - 50;
-
-        butterfly.style.left = `${left}%`;
-        butterfly.style.top = `${top}%`;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const size = Math.floor(Math.random() * 18 + 28); // px
         butterfly.style.width = `${size}px`;
-        butterfly.style.animationDuration = `${duration}s`;
-        butterfly.style.animationDelay = `${delay}s`;
-        butterfly.style.setProperty('--dx', `${dx}px`);
-        butterfly.style.setProperty('--dy', `${dy}px`);
+
+        // Choose a spawn edge: left, right, top, bottom
+        const edges = ['left', 'right', 'top', 'bottom'];
+        const edge = edges[Math.floor(Math.random() * edges.length)];
+
+        // Target position: somewhere near center area (40% - 60% both axes)
+        const targetX = 40 + Math.random() * 20; // percent
+        const targetY = 35 + Math.random() * 30; // percent
+
+        let start = { left: '0%', top: '50%' };
+        if (edge === 'left') start = { left: '-10%', top: `${10 + Math.random() * 80}%` };
+        if (edge === 'right') start = { left: '110%', top: `${10 + Math.random() * 80}%` };
+        if (edge === 'top') start = { left: `${5 + Math.random() * 90}%`, top: '-12%' };
+        if (edge === 'bottom') start = { left: `${5 + Math.random() * 90}%`, top: '110%' };
+
+        butterfly.style.left = start.left;
+        butterfly.style.top = start.top;
+
+        // Randomize duration and delay
+        const duration = (8 + Math.random() * 8) * 1000; // ms
+        const delay = Math.random() * 800; // ms
 
         butterflyLayer.appendChild(butterfly);
 
-        setTimeout(() => {
+        // Use WAAPI to animate 'left' and 'top' from edge to near-center
+        const keyframes = [
+            { left: start.left, top: start.top, opacity: 0 },
+            { left: `${targetX}%`, top: `${targetY}%`, opacity: 1, offset: 0.5 },
+            { left: `${targetX + (Math.random() * 6 - 3)}%`, top: `${targetY - (Math.random() * 10)}%`, opacity: 0 }
+        ];
+
+        const anim = butterfly.animate(keyframes, {
+            duration: duration,
+            delay: delay,
+            easing: 'ease-in-out',
+            fill: 'forwards'
+        });
+
+        // Add a light flutter transform via CSS animation alongside
+        butterfly.style.animation = `flutter ${Math.max(3, duration / 1000)}s ease-in-out`;
+
+        anim.onfinish = () => {
             butterfly.remove();
-        }, (duration + delay + 0.5) * 1000);
+        };
     };
 
     const showButterflies = () => {

@@ -1191,15 +1191,16 @@ body:not(.cover-active) #bg-video {
   }
 }
 
+
 .butterfly-layer {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 20;
-  overflow: hidden;
+  z-index: 9999;
+  overflow: visible;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease, visibility 1s ease;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 
 .butterfly-layer.visible {
@@ -1208,36 +1209,20 @@ body:not(.cover-active) #bg-video {
 }
 
 .butterfly {
-  position: absolute;
+  position: fixed; /* fixed so it stays in viewport while scrolling */
   display: block;
   pointer-events: none;
-  will-change: transform, opacity;
-  animation-name: flutter;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
+  will-change: left, top, transform, opacity;
   opacity: 0;
-  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.5));
+  filter: drop-shadow(0 0 12px rgba(0,0,0,0.18));
+  transform-origin: center;
 }
 
 @keyframes flutter {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0;
-  }
-
-  15% {
-    opacity: 1;
-  }
-
-  50% {
-    transform: translate(var(--dx), var(--dy)) rotate(12deg);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(calc(var(--dx) * 1.1), calc(var(--dy) * 1.1)) rotate(-12deg);
-    opacity: 0;
-  }
+  0% { opacity: 0; transform: scale(0.95) rotate(0deg); }
+  20% { opacity: 1; transform: scale(1) rotate(6deg); }
+  80% { opacity: 1; transform: scale(1.02) rotate(-6deg); }
+  100% { opacity: 0; transform: scale(0.98) rotate(0deg); }
 }
 
 /* Mobile Media Queries */
