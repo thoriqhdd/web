@@ -17,14 +17,16 @@
 
 <body>
 
+  <div id="butterfly-layer" class="butterfly-layer hidden" aria-hidden="true"></div>
+
   <!-- Audio element for background music -->
   <audio id="bg-music" loop>
     <source src="Foto Background/Backsound.MP3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <!-- Background Video (fixed behind content, paused on load) -->
+  <!-- Background Video (loads only after user clicks Buka Undangan) -->
   <div class="video-container" id="video-container">
-    <video id="bg-video" muted playsinline preload="auto" poster="Foto Pasangan/MONO0357-Edit.jpg">
+    <video id="bg-video" muted playsinline preload="none">
       <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -32,9 +34,9 @@
   <section id="cover" class="cover-section">
     <div class="cover-grid">
       <div class="cover-slideshow">
-        <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1" class="slide-img active">
-        <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2" class="slide-img">
-        <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3" class="slide-img">
+        <img src="Foto Pasangan/MONO0357-Edit.webp" alt="Pasangan 1" class="slide-img active">
+        <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Pasangan 2" class="slide-img" loading="lazy" decoding="async">
+        <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Pasangan 3" class="slide-img" loading="lazy" decoding="async">
       </div>
       <div class="cover-card">
         <div class="cover-content">
@@ -59,7 +61,7 @@
 
     <!-- Slide 1: Spacer to show the full video playing -->
     <section class="slide slide-hero">
-      <video id="hero-video" autoplay muted playsinline preload="metadata" class="hero-video">
+      <video id="hero-video" muted playsinline preload="none" class="hero-video">
         <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -70,26 +72,26 @@
       <div class="content-box quran-section">
         <div class="quran-photo-slider">
           <div class="quran-photo-track">
-            <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1">
-            <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2">
-            <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3">
-            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4">
-            <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Pasangan 5">
-            <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Pasangan 6">
-            <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Pasangan 7">
-            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8">
-            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9">
-            <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Pasangan 10">
-            <img src="Foto Pasangan/MONO0357-Edit.jpg" alt="Pasangan 1">
-            <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Pasangan 2">
-            <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Pasangan 3">
-            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4">
-            <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Pasangan 5">
-            <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Pasangan 6">
-            <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Pasangan 7">
-            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8">
-            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9">
-            <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Pasangan 10">
+            <img src="Foto Pasangan/MONO0357-Edit.webp" alt="Pasangan 1" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Pasangan 2" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Pasangan 3" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0380-Edit.webp" alt="Pasangan 5" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0383-Edit.webp" alt="Pasangan 6" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0392-Edit.webp" alt="Pasangan 7" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0424-Edit.webp" alt="Pasangan 10" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0357-Edit.webp" alt="Pasangan 1" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Pasangan 2" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Pasangan 3" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Pasangan 4" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0380-Edit.webp" alt="Pasangan 5" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0383-Edit.webp" alt="Pasangan 6" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0392-Edit.webp" alt="Pasangan 7" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Pasangan 8" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Pasangan 9" loading="lazy" decoding="async">
+            <img src="Foto Pasangan/MONO0424-Edit.webp" alt="Pasangan 10" loading="lazy" decoding="async">
           </div>
         </div>
         <h2 class="quran-title section-title" data-aos="fade-up" data-aos-duration="1000">We Found Love</h2>
@@ -109,7 +111,7 @@
         <h2 class="section-title section-title--mempelai" data-aos="zoom-in" data-aos-duration="1000">Mempelai</h2>
 
         <div class="profile groom" data-aos="fade-right" data-aos-duration="1000">
-          <img src="Foto Pria/Pria1.jpg" alt="Groom" class="profile-img">
+          <img src="Foto Pria/Pria1.webp" alt="Groom" class="profile-img" loading="lazy" decoding="async">
           <h3 class="profile-name">Thoriq</h3>
           <p class="profile-desc">Muhammad Thoriq Hadad, S.Pd<br>Anak kedua dari H. Mar'ih HM, M.Pd.I & Hj. Amyati</p>
           <a href="https://instagram.com/Thoriqhdd" target="_blank" class="btn-ig"><i class="fab fa-instagram"></i>
@@ -117,7 +119,7 @@
         </div>
 
         <div class="profile bride mt-4" data-aos="fade-left" data-aos-duration="1000">
-          <img src="Foto Wanita/Wanita1.jpg" alt="Bride" class="profile-img">
+          <img src="Foto Wanita/Wanita1.webp" alt="Bride" class="profile-img" loading="lazy" decoding="async">
           <h3 class="profile-name">April</h3>
           <p class="profile-desc">Annisa Apriliani, S.Pd<br>Anak ketiga dari Bpk. Herman (Alm) & Ros Pandan</p>
           <a href="https://instagram.com/annisaaprill_" target="_blank" class="btn-ig"><i class="fab fa-instagram"></i>
@@ -130,9 +132,9 @@
     <section class="slide slide-soft">
       <div class="content-box text-center">
         <div class="fading-images" id="fading-images" data-aos="zoom-in" data-aos-duration="1200">
-          <img src="Foto Pasangan/MONO0360-Edit.jpg" alt="Fading 1" class="fade-img active">
-          <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Fading 2" class="fade-img">
-          <img src="Foto Pasangan/MONO0372-Edit.jpg" alt="Fading 3" class="fade-img">
+          <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Fading 1" class="fade-img active" loading="lazy" decoding="async">
+          <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Fading 2" class="fade-img" loading="lazy" decoding="async">
+          <img src="Foto Pasangan/MONO0372-Edit.webp" alt="Fading 3" class="fade-img" loading="lazy" decoding="async">
         </div>
 
         <h2 class="section-title mt-4" data-aos="fade-up" data-aos-duration="1000">Save The Date</h2>
@@ -192,26 +194,16 @@
       <div class="content-box z-index-1 gallery-content" style="width: 100%;">
         <h2 class="section-title section-title--gallery" data-aos="zoom-in" data-aos-duration="1000">Our Gallery</h2>
         <div class="gallery-grid">
-          <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Gallery 1" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="0">
-          <img src="Foto Pasangan/MONO0375-Edit.jpg" alt="Gallery 2" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="100">
-          <img src="Foto Pasangan/MONO0377-Edit.jpg" alt="Gallery 3" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="200">
-          <img src="Foto Pasangan/MONO0380-Edit.jpg" alt="Gallery 4" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="300">
-          <img src="Foto Pasangan/MONO0383-Edit.jpg" alt="Gallery 5" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="400">
-          <img src="Foto Pasangan/MONO0392-Edit.jpg" alt="Gallery 6" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="500">
-          <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Gallery 7" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="600">
-          <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Gallery 8" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="700">
-          <img src="Foto Pasangan/MONO0424-Edit.jpg" alt="Gallery 9" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="800">
-          <img src="Foto Pasangan/MONO0364-Edit.jpg" alt="Gallery 10" data-aos="zoom-in" data-aos-duration="800"
-            data-aos-delay="900">
+          <img src="Foto Pasangan/MONO0374-Edit.jpg" alt="Gallery 1" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="0">
+          <img src="Foto Pasangan/MONO0375-Edit.webp" alt="Gallery 2" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+          <img src="Foto Pasangan/MONO0377-Edit.webp" alt="Gallery 3" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
+          <img src="Foto Pasangan/MONO0380-Edit.webp" alt="Gallery 4" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+          <img src="Foto Pasangan/MONO0383-Edit.webp" alt="Gallery 5" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
+          <img src="Foto Pasangan/MONO0392-Edit.webp" alt="Gallery 6" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500">
+          <img src="Foto Pasangan/MONO0403-Edit.jpg" alt="Gallery 7" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="600">
+          <img src="Foto Pasangan/MONO0423-Edit.jpg" alt="Gallery 8" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="700">
+          <img src="Foto Pasangan/MONO0424-Edit.webp" alt="Gallery 9" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="800">
+          <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Gallery 10" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="900">
         </div>
       </div>
     </section>

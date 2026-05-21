@@ -216,7 +216,7 @@ body:not(.cover-active) #bg-video {
   align-items: center;
   z-index: 50;
   background-color: #12100e;
-  background-image: radial-gradient(circle at center, rgba(163, 138, 117, 0.15) 0%, transparent 80%), url('Foto Background/Frame1.png');
+  background-image: radial-gradient(circle at center, rgba(163, 138, 117, 0.15) 0%, transparent 80%), url('Foto Background/Frame1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -501,6 +501,7 @@ body:not(.cover-active) #bg-video {
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;
+  background-color: #0c0b0a; /* dark fallback while video is loading */
 }
 
 .hero-video {
@@ -519,7 +520,7 @@ body:not(.cover-active) #bg-video {
 }
 
 .section-with-background {
-  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.7), rgba(18, 16, 14, 0.75)), url('Foto Background/Background.png');
+  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.7), rgba(18, 16, 14, 0.75)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -820,7 +821,7 @@ body:not(.cover-active) #bg-video {
   padding: 40px 30px;
   color: var(--text-light);
   box-shadow: var(--shadow-lg);
-  background-image: linear-gradient(135deg, rgba(18, 16, 14, 0.75), rgba(122, 98, 78, 0.4)), url('Foto Background/Background.png');
+  background-image: linear-gradient(135deg, rgba(18, 16, 14, 0.75), rgba(122, 98, 78, 0.4)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1127,7 +1128,7 @@ body:not(.cover-active) #bg-video {
 
 /* Thank You Section */
 .slide-thankyou {
-  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.85), rgba(18, 16, 14, 0.9)), url('Foto Background/Background.png');
+  background-image: linear-gradient(to bottom, rgba(18, 16, 14, 0.85), rgba(18, 16, 14, 0.9)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1187,6 +1188,55 @@ body:not(.cover-active) #bg-video {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.butterfly-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.butterfly-layer.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.butterfly {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation-name: flutter;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.5));
+}
+
+@keyframes flutter {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(var(--dx), var(--dy)) rotate(12deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(calc(var(--dx) * 1.1), calc(var(--dy) * 1.1)) rotate(-12deg);
+    opacity: 0;
   }
 }
 

@@ -21,20 +21,23 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.add('scroll-locked');
     document.body.classList.add('scroll-locked');
 
-    // Ensure video is loaded but paused on page load so it's visible
-    const showBgFrame = () => {
-        if (!bgVideo) return;
-        bgVideo.muted = true;
-        bgVideo.pause();
-        bgVideo.currentTime = 0;
+    // bg-video uses preload="none" — it won't load until user clicks the button
+
+    // Preload videos as soon as user presses the button (mousedown/touchstart)
+    // This gives ~300ms head start before the click event fires
+    const preloadVideos = () => {
+        if (bgVideo) bgVideo.load();
+        const heroVid = document.getElementById('hero-video');
+        if (heroVid && !heroVid.hasAttribute('data-preloaded')) {
+            // Set poster dynamically so it doesn't download on page load
+            heroVid.setAttribute('poster', 'Foto Pasangan/MONO0357-Edit.webp');
+            heroVid.load();
+            heroVid.setAttribute('data-preloaded', 'true');
+        }
     };
 
-    if (bgVideo) {
-        bgVideo.addEventListener('loadeddata', showBgFrame);
-        if (bgVideo.readyState >= 2) {
-            showBgFrame();
-        }
-    }
+    btnBuka.addEventListener('mousedown', preloadVideos);
+    btnBuka.addEventListener('touchstart', preloadVideos, { passive: true });
 
     btnBuka.addEventListener('click', () => {
         // Slide up cover
@@ -57,15 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
             musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
         }).catch(error => console.log("Audio play failed: ", error));
 
-        // Ensure background video is playing
+        // Play background video (already loading since mousedown)
         if (bgVideo) {
             bgVideo.play().catch(error => console.log("Video play failed: ", error));
         }
 
-        // Play hero video on first slide from the beginning
+        // Play hero video (already loading since mousedown)
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
-            heroVideo.currentTime = 0;
             heroVideo.play().catch(error => console.log("Hero video play failed: ", error));
         }
 
@@ -77,10 +79,60 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     });
 
+    const butterflyLayer = document.getElementById('butterfly-layer');
+    const butterflySrc = 'Foto Background/Kupu-kupu.gif';
+
+    const createButterfly = () => {
+        if (!butterflyLayer) return;
+
+        const butterfly = document.createElement('img');
+        butterfly.classList.add('butterfly');
+        butterfly.src = butterflySrc;
+        butterfly.alt = '';
+        butterfly.setAttribute('aria-hidden', 'true');
+
+        const left = Math.random() * 90;
+        const top = Math.random() * 80;
+        const size = Math.random() * 18 + 32;
+        const duration = Math.random() * 10 + 10;
+        const delay = Math.random() * 4;
+        const dx = Math.random() * 120 - 60;
+        const dy = Math.random() * 100 - 50;
+
+        butterfly.style.left = `${left}%`;
+        butterfly.style.top = `${top}%`;
+        butterfly.style.width = `${size}px`;
+        butterfly.style.animationDuration = `${duration}s`;
+        butterfly.style.animationDelay = `${delay}s`;
+        butterfly.style.setProperty('--dx', `${dx}px`);
+        butterfly.style.setProperty('--dy', `${dy}px`);
+
+        butterflyLayer.appendChild(butterfly);
+
+        setTimeout(() => {
+            butterfly.remove();
+        }, (duration + delay + 0.5) * 1000);
+    };
+
+    const showButterflies = () => {
+        if (!butterflyLayer) return;
+        butterflyLayer.classList.remove('hidden');
+        butterflyLayer.classList.add('visible');
+
+        for (let i = 0; i < 10; i += 1) {
+            setTimeout(createButterfly, i * 300);
+        }
+
+        if (!window.butterflyInterval) {
+            window.butterflyInterval = setInterval(createButterfly, 1800);
+        }
+    };
+
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
+            showButterflies();
         });
     }
 
