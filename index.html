@@ -4,16 +4,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan Thoriq & April</title>
+  <title>Thoriq & April Wedding</title>
   <meta name="description"
     content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - 20 Juni 2026, Gedung Aula SMKN 26 Jakarta.">
   <link rel="icon" type="image/webp" href="Foto Background/logo.webp">
+
+  <!-- Preconnect to external domains for faster DNS/TLS handshake -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+
+  <!-- Preload LCP (Largest Contentful Paint) image - cover photo shown immediately -->
+  <link rel="preload" as="image" href="Foto Pasangan/MONO0357-Edit.webp" fetchpriority="high">
+
+  <!-- Core CSS (render-critical, loaded synchronously) -->
   <link rel="stylesheet" href="style.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome - loaded async to avoid render-blocking (icons only, non-critical) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- AOS CSS - must load synchronously before AOS.init() runs, otherwise animations break -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 
 <body>
@@ -25,17 +40,11 @@
     <source src="Foto Background/Backsound.MP3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <!-- Background Video (loads only after user clicks Buka Undangan) -->
-  <div class="video-container" id="video-container">
-    <video id="bg-video" muted playsinline preload="none">
-      <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+  <!-- Hero Video — loaded only when user clicks Buka Undangan -->
   <section id="cover" class="cover-section">
     <div class="cover-grid">
       <div class="cover-slideshow">
-        <img src="Foto Pasangan/MONO0357-Edit.webp" alt="Pasangan 1" class="slide-img active">
+        <img src="Foto Pasangan/MONO0357-Edit.webp" alt="Pasangan 1" class="slide-img active" fetchpriority="high">
         <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Pasangan 2" class="slide-img" loading="lazy" decoding="async">
         <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Pasangan 3" class="slide-img" loading="lazy" decoding="async">
       </div>

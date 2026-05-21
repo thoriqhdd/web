@@ -84,6 +84,23 @@ html {
   z-index: 1;
 }
 
+/* Spinner animation (fallback if Font Awesome loads async) */
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.fa-spin {
+  animation: fa-spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* Button loading state */
+.btn-cover:disabled {
+  opacity: 0.85;
+  cursor: wait;
+  pointer-events: none;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -679,7 +696,7 @@ body:not(.cover-active) #bg-video {
 
 .section-title--gallery {
   font-family: var(--font-royal);
-  font-size: 4.5rem;
+  font-size: 3rem;
   color: var(--accent);
   text-transform: none;
   letter-spacing: 0;

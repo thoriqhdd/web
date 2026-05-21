@@ -13,70 +13,90 @@ document.addEventListener("DOMContentLoaded", () => {
     const coverSection = document.getElementById('cover');
     const mainContent = document.getElementById('main-content');
     const bgMusic = document.getElementById('bg-music');
-    const bgVideo = document.getElementById('bg-video');
     const musicToggle = document.getElementById('music-toggle');
+    const heroVideo = document.getElementById('hero-video');
 
     // Keep cover state active on load to darken the background video, lock scroll completely
     document.body.classList.add('cover-active');
     document.documentElement.classList.add('scroll-locked');
     document.body.classList.add('scroll-locked');
 
-    // bg-video uses preload="none" — it won't load until user clicks the button
-
-    // Preload videos as soon as user presses the button (mousedown/touchstart)
-    // This gives ~300ms head start before the click event fires
+    // Auto-preload the video 2 seconds after page load so it has time to buffer.
+    // This way, on slow connections the video is already partially buffered by the
+    // time the user clicks "Buka Undangan".
+    let videoPreloaded = false;
     const preloadVideos = () => {
-        if (bgVideo) bgVideo.load();
-        const heroVid = document.getElementById('hero-video');
-        if (heroVid && !heroVid.hasAttribute('data-preloaded')) {
-            // Set poster dynamically so it doesn't download on page load
-            heroVid.setAttribute('poster', 'Foto Pasangan/MONO0357-Edit.webp');
-            heroVid.load();
-            heroVid.setAttribute('data-preloaded', 'true');
+        if (videoPreloaded) return;
+        videoPreloaded = true;
+        if (heroVideo && !heroVideo.hasAttribute('data-preloaded')) {
+            heroVideo.setAttribute('poster', 'Foto Pasangan/MONO0357-Edit.webp');
+            heroVideo.preload = 'auto';
+            heroVideo.load();
+            heroVideo.setAttribute('data-preloaded', 'true');
         }
     };
 
+    // Start buffering automatically after 2s (page is already painted by then)
+    setTimeout(preloadVideos, 2000);
+
+    // Also trigger on user interaction as a guaranteed fallback
     btnBuka.addEventListener('mousedown', preloadVideos);
     btnBuka.addEventListener('touchstart', preloadVideos, { passive: true });
 
     btnBuka.addEventListener('click', () => {
-        // Slide up cover
-        coverSection.classList.add('slide-up');
+        // Show loading state on button
+        btnBuka.disabled = true;
+        btnBuka.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Membuka...';
 
-        // Show main content and unlock scroll
-        mainContent.classList.remove('hidden');
-        document.documentElement.classList.remove('scroll-locked');
-        document.body.classList.remove('scroll-locked');
-        
-        // Refresh AOS immediately to recalculate coordinates of revealed elements
-        if (typeof AOS !== 'undefined') {
-            AOS.refresh();
+        const openInvitation = () => {
+            // Slide up cover
+            coverSection.classList.add('slide-up');
+
+            // Show main content and unlock scroll
+            mainContent.classList.remove('hidden');
+            document.documentElement.classList.remove('scroll-locked');
+            document.body.classList.remove('scroll-locked');
+
+            // Refresh AOS immediately to recalculate coordinates of revealed elements
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+
+            // Play music
+            bgMusic.play().then(() => {
+                musicToggle.classList.add('playing');
+                musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }).catch(error => console.log("Audio play failed: ", error));
+
+            // Play hero video
+            if (heroVideo) {
+                heroVideo.play().catch(error => console.log("Hero video play failed: ", error));
+            }
+
+            // Wait for slide up animation then hide cover completely
+            document.body.classList.remove('cover-active');
+            setTimeout(() => {
+                coverSection.style.display = 'none';
+                if (typeof AOS !== 'undefined') AOS.refresh();
+            }, 1000);
+        };
+
+        if (heroVideo && heroVideo.readyState >= 3) {
+            // Video has enough data buffered — open immediately
+            openInvitation();
+        } else if (heroVideo) {
+            // Wait for video to buffer enough (canplay = enough data to start)
+            // On very slow connections, apply a 4-second max timeout as fallback
+            const timeout = setTimeout(openInvitation, 4000);
+            heroVideo.addEventListener('canplay', () => {
+                clearTimeout(timeout);
+                openInvitation();
+            }, { once: true });
+            // Make sure video is loading
+            preloadVideos();
+        } else {
+            openInvitation();
         }
-
-        // Play music
-        bgMusic.load();
-        bgMusic.play().then(() => {
-            musicToggle.classList.add('playing');
-            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }).catch(error => console.log("Audio play failed: ", error));
-
-        // Play background video (already loading since mousedown)
-        if (bgVideo) {
-            bgVideo.play().catch(error => console.log("Video play failed: ", error));
-        }
-
-        // Play hero video (already loading since mousedown)
-        const heroVideo = document.getElementById('hero-video');
-        if (heroVideo) {
-            heroVideo.play().catch(error => console.log("Hero video play failed: ", error));
-        }
-
-        // Wait for slide up animation then hide cover completely
-        document.body.classList.remove('cover-active');
-        setTimeout(() => {
-            coverSection.style.display = 'none';
-            AOS.refresh();
-        }, 1000);
     });
 
     const butterflyLayer = document.getElementById('butterfly-layer');
@@ -180,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try { showButterflies(); } catch (e) { /* silent */ }
     }, 700);
 
-    const heroVideo = document.getElementById('hero-video');
+    // Listen for hero video end to trigger butterflies
     if (heroVideo) {
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
