@@ -1196,7 +1196,8 @@ body:not(.cover-active) #bg-video {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
+  /* place behind page content but above background video (-2) */
+  z-index: -1;
   overflow: visible;
   opacity: 0;
   visibility: hidden;

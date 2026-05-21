@@ -93,48 +93,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        const size = Math.floor(Math.random() * 18 + 28); // px
+        const size = Math.floor(Math.random() * 22 + 26); // px
         butterfly.style.width = `${size}px`;
 
-        // Choose a spawn edge: left, right, top, bottom
+        // Choose a spawn edge and opposite exit edge
         const edges = ['left', 'right', 'top', 'bottom'];
         const edge = edges[Math.floor(Math.random() * edges.length)];
+        let startX, startY, endX, endY;
 
-        // Target position: somewhere near center area (40% - 60% both axes)
-        const targetX = 40 + Math.random() * 20; // percent
-        const targetY = 35 + Math.random() * 30; // percent
+        if (edge === 'left') {
+            startX = -Math.round(size * 1.5);
+            startY = Math.random() * vh;
+            endX = vw + Math.round(size * 1.5);
+            endY = Math.random() * vh;
+        } else if (edge === 'right') {
+            startX = vw + Math.round(size * 1.5);
+            startY = Math.random() * vh;
+            endX = -Math.round(size * 1.5);
+            endY = Math.random() * vh;
+        } else if (edge === 'top') {
+            startX = Math.random() * vw;
+            startY = -Math.round(size * 1.5);
+            endX = Math.random() * vw;
+            endY = vh + Math.round(size * 1.5);
+        } else { // bottom
+            startX = Math.random() * vw;
+            startY = vh + Math.round(size * 1.5);
+            endX = Math.random() * vw;
+            endY = -Math.round(size * 1.5);
+        }
 
-        let start = { left: '0%', top: '50%' };
-        if (edge === 'left') start = { left: '-10%', top: `${10 + Math.random() * 80}%` };
-        if (edge === 'right') start = { left: '110%', top: `${10 + Math.random() * 80}%` };
-        if (edge === 'top') start = { left: `${5 + Math.random() * 90}%`, top: '-12%' };
-        if (edge === 'bottom') start = { left: `${5 + Math.random() * 90}%`, top: '110%' };
+        butterfly.style.left = `${startX}px`;
+        butterfly.style.top = `${startY}px`;
 
-        butterfly.style.left = start.left;
-        butterfly.style.top = start.top;
+        // Natural mid control point with some randomness
+        const midX = startX + (endX - startX) * (0.3 + Math.random() * 0.4) + (Math.random() * vw * 0.06 - vw * 0.03);
+        const midY = startY + (endY - startY) * (0.3 + Math.random() * 0.4) + (Math.random() * vh * 0.08 - vh * 0.04);
 
-        // Randomize duration and delay
-        const duration = (8 + Math.random() * 8) * 1000; // ms
-        const delay = Math.random() * 800; // ms
+        const duration = Math.floor(8000 + Math.random() * 12000); // ms
+        const delay = Math.random() * 800;
 
         butterflyLayer.appendChild(butterfly);
 
-        // Use WAAPI to animate 'left' and 'top' from edge to near-center
+        const rotate1 = (Math.random() * 40 - 20).toFixed(1);
+        const rotate2 = (Math.random() * 40 - 20).toFixed(1);
+
         const keyframes = [
-            { left: start.left, top: start.top, opacity: 0 },
-            { left: `${targetX}%`, top: `${targetY}%`, opacity: 1, offset: 0.5 },
-            { left: `${targetX + (Math.random() * 6 - 3)}%`, top: `${targetY - (Math.random() * 10)}%`, opacity: 0 }
+            { transform: `translate(0px, 0px) rotate(${rotate1}deg)`, opacity: 0, offset: 0 },
+            { transform: `translate(${midX - startX}px, ${midY - startY}px) rotate(${(rotate1 - rotate2) / 2}deg)`, opacity: 1, offset: 0.45 },
+            { transform: `translate(${endX - startX}px, ${endY - startY}px) rotate(${rotate2}deg)`, opacity: 0, offset: 1 }
         ];
 
         const anim = butterfly.animate(keyframes, {
-            duration: duration,
-            delay: delay,
-            easing: 'ease-in-out',
+            duration,
+            delay,
+            easing: 'cubic-bezier(0.22, 0.8, 0.25, 1)',
             fill: 'forwards'
         });
 
-        // Add a light flutter transform via CSS animation alongside
-        butterfly.style.animation = `flutter ${Math.max(3, duration / 1000)}s ease-in-out`;
+        // subtle continuous wing flutter using CSS animation overlay
+        butterfly.style.animation = `flutter ${Math.max(3, duration / 1000)}s ease-in-out infinite`;
 
         anim.onfinish = () => {
             butterfly.remove();
