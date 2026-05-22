@@ -239,7 +239,7 @@ body:not(.cover-active) #bg-video {
   align-items: center;
   z-index: 50;
   background-color: #1a1918;
-  background-image: radial-gradient(circle at center, rgba(201, 184, 154, 0.12) 0%, transparent 80%), url('Foto Background/Frame1.webp');
+  background-image: radial-gradient(circle at center, rgba(201, 184, 154, 0.12) 0%, transparent 80%), url('Foto%20Background/Frame1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -303,13 +303,12 @@ body:not(.cover-active) #bg-video {
 .cover-card {
   width: 100%;
   height: 75vh;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 80px;
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  padding: 50px 30px;
-  box-shadow: var(--shadow-lg);
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -328,19 +327,20 @@ body:not(.cover-active) #bg-video {
 .cover-subtitle {
   font-family: var(--font-sans);
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: var(--primary-dark);
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .cover-title {
   font-family: var(--font-royal);
   font-size: 3.8rem;
-  color: var(--primary-dark);
+  color: #ffffff;
   line-height: 1.2;
   margin-top: 10px;
-  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .cover-title .ampersand {
@@ -385,17 +385,19 @@ body:not(.cover-active) #bg-video {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--text-muted);
+  color: #f0f0f0;
   line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .cover-guest-name {
   font-family: var(--font-serif);
   font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--primary-dark);
+  font-weight: 600;
+  color: #ffffff;
   margin: 15px 0 25px;
   letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .cover-section.slide-up {
@@ -528,6 +530,11 @@ body:not(.cover-active) #bg-video {
   /* fallback while video is loading */
 }
 
+.slide-hero::before,
+.slide-hero::after {
+  display: none !important;
+}
+
 .hero-video {
   position: absolute;
   top: 0;
@@ -544,7 +551,7 @@ body:not(.cover-active) #bg-video {
 }
 
 .section-with-background {
-  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.78), rgba(244, 242, 239, 0.88)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.78), rgba(244, 242, 239, 0.88)), url('Foto%20Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -882,7 +889,7 @@ body:not(.cover-active) #bg-video {
   padding: 40px 30px;
   color: var(--text-dark);
   box-shadow: var(--shadow-lg);
-  background-image: linear-gradient(135deg, rgba(252, 251, 249, 0.82), rgba(201, 184, 154, 0.35)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(135deg, rgba(252, 251, 249, 0.82), rgba(201, 184, 154, 0.35)), url('Foto%20Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1185,10 +1192,44 @@ body:not(.cover-active) #bg-video {
 
 /* Thank You Section */
 .slide-thankyou {
-  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.82), rgba(244, 242, 239, 0.90)), url('Foto Background/Background.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.78), rgba(244, 242, 239, 0.88)), url('Foto%20Background/Background.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  padding: 0 !important;
+}
+
+.gallery-slide {
+  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.78), rgba(244, 242, 239, 0.88)), url('Foto%20Background/Background.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  padding: 0 !important;
+}
+
+.gallery-slide .overlay-dark,
+.slide-thankyou .overlay-darker {
+  display: none !important;
+}
+
+.gallery-slide .content-box,
+.slide-thankyou .content-box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.gallery-slide .content-box {
+  max-width: 900px !important;
+}
+
+.gallery-slide .content-box::before,
+.gallery-slide .content-box::after,
+.slide-thankyou .content-box::before,
+.slide-thankyou .content-box::after {
+  display: none !important;
 }
 
 .thankyou-text {
@@ -1534,9 +1575,9 @@ body.cover-active .music-toggle {
   }
 
   .cover-card {
-    padding: 35px 20px;
+    padding: 0;
     height: 80vh;
-    border-radius: 30px;
+    border-radius: 0;
   }
 
   .cover-title {
