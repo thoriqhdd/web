@@ -24,15 +24,15 @@
   <!-- Font Awesome - loaded async to avoid render-blocking (icons only, non-critical) -->
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
 
   <!-- AOS CSS - must load synchronously before AOS.init() runs, otherwise animations break -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 
 <body>
-
   <div id="butterfly-layer" class="butterfly-layer hidden" aria-hidden="true"></div>
 
   <!-- Audio element for background music -->
@@ -136,7 +136,8 @@
     <section class="slide slide-soft">
       <div class="content-box text-center">
         <div class="fading-images" id="fading-images" data-aos="zoom-in" data-aos-duration="1200">
-          <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Fading 1" class="fade-img active" loading="lazy" decoding="async">
+          <img src="Foto Pasangan/MONO0360-Edit.webp" alt="Fading 1" class="fade-img active" loading="lazy"
+            decoding="async">
           <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Fading 2" class="fade-img" loading="lazy" decoding="async">
           <img src="Foto Pasangan/MONO0372-Edit.webp" alt="Fading 3" class="fade-img" loading="lazy" decoding="async">
         </div>
@@ -198,13 +199,20 @@
       <div class="content-box z-index-1 gallery-content" style="width: 100%;">
         <h2 class="section-title section-title--gallery" data-aos="zoom-in" data-aos-duration="1000">Our Gallery</h2>
         <div class="gallery-grid">
-          <img src="Foto Pasangan/MONO0375-Edit.webp" alt="Gallery 2" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
-          <img src="Foto Pasangan/MONO0377-Edit.webp" alt="Gallery 3" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
-          <img src="Foto Pasangan/MONO0380-Edit.webp" alt="Gallery 4" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
-          <img src="Foto Pasangan/MONO0383-Edit.webp" alt="Gallery 5" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
-          <img src="Foto Pasangan/MONO0392-Edit.webp" alt="Gallery 6" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500">
-          <img src="Foto Pasangan/MONO0424-Edit.webp" alt="Gallery 9" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="800">
-          <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Gallery 10" loading="lazy" decoding="async" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="900">
+          <img src="Foto Pasangan/MONO0375-Edit.webp" alt="Gallery 2" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="100">
+          <img src="Foto Pasangan/MONO0377-Edit.webp" alt="Gallery 3" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="200">
+          <img src="Foto Pasangan/MONO0380-Edit.webp" alt="Gallery 4" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="300">
+          <img src="Foto Pasangan/MONO0383-Edit.webp" alt="Gallery 5" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="400">
+          <img src="Foto Pasangan/MONO0392-Edit.webp" alt="Gallery 6" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="500">
+          <img src="Foto Pasangan/MONO0424-Edit.webp" alt="Gallery 9" loading="lazy" decoding="async" data-aos="zoom-in"
+            data-aos-duration="800" data-aos-delay="800">
+          <img src="Foto Pasangan/MONO0364-Edit.webp" alt="Gallery 10" loading="lazy" decoding="async"
+            data-aos="zoom-in" data-aos-duration="800" data-aos-delay="900">
         </div>
       </div>
     </section>
@@ -219,22 +227,30 @@
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <h4>Pertama Bertemu</h4>
-              <p>Dalam satu kampus dan ruang kelas yang sama, semesta mempertemukan kami tanpa banyak kata. Percakapan kami kala itu hanya tentang tugas dan perkuliahan. Sederhana, biasa saja. Namun ternyata, dari pertemuan sederhana itulah, semesta mulai menulis kisah kami.</p>
-              </div>
+              <p>Dalam satu kampus dan ruang kelas yang sama, semesta mempertemukan kami tanpa banyak kata. Percakapan
+                kami kala itu hanya tentang tugas dan perkuliahan. Sederhana, biasa saja. Namun ternyata, dari pertemuan
+                sederhana itulah, semesta mulai menulis kisah kami.</p>
+            </div>
           </div>
           <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <h4>Akhir Masa Kuliah</h4>
-              <p>Menjelang akhir kuliah, semesta mempertemukan kami kembali dalam perjuangan yang sama—menyelesaikan skripsi. Dari ruang bimbingan dan cerita sederhana, kami mulai saling mengenal lebih dalam. Perlahan, kami menjadi tempat pulang di tengah lelahnya perjuangan. Ternyata, skripsi bukan hanya tentang akhir pendidikan, tetapi juga awal dari kisah kami.</p>
+              <p>Menjelang akhir kuliah, semesta mempertemukan kami kembali dalam perjuangan yang sama—menyelesaikan
+                skripsi. Dari ruang bimbingan dan cerita sederhana, kami mulai saling mengenal lebih dalam. Perlahan,
+                kami menjadi tempat pulang di tengah lelahnya perjuangan. Ternyata, skripsi bukan hanya tentang akhir
+                pendidikan, tetapi juga awal dari kisah kami.</p>
             </div>
           </div>
           <div class="timeline-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <h4>Menuju Ikatan Suci</h4>
-              <p>Di tengah perjalanan yang penuh perjuangan, langkah kami perlahan berjalan beriringan. Dari lelah dan cerita yang kami lalui bersama, tumbuh rasa yang tak pernah direncanakan. Hingga akhirnya kami menyadari, pertemuan sederhana ini membawa kami pada tujuan yang sama—melangkah bersama dalam ikatan suci, untuk saling menjaga dan mencintai seumur hidup.</p>
-<p class="hashtag">#FromSkripsiToSah</p>
+              <p>Di tengah perjalanan yang penuh perjuangan, langkah kami perlahan berjalan beriringan. Dari lelah dan
+                cerita yang kami lalui bersama, tumbuh rasa yang tak pernah direncanakan. Hingga akhirnya kami
+                menyadari, pertemuan sederhana ini membawa kami pada tujuan yang sama—melangkah bersama dalam ikatan
+                suci, untuk saling menjaga dan mencintai seumur hidup.</p>
+              <p class="hashtag">#FromSkripsiToSah</p>
             </div>
           </div>
         </div>

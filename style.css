@@ -2,27 +2,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
-  --primary: #A38A75;
-  /* Warm luxury champagne gold */
-  --primary-light: #C8B195;
-  --primary-dark: #7A624E;
-  --accent: #D4AF37;
-  /* Wedding gold accent */
-  --bg-cream: #FAF7F2;
-  /* Luxury cream backdrop */
-  --text-dark: #2C2520;
-  --text-muted: #5C524A;
+  --primary: #8A8885;
+  /* Elegant silver-grey */
+  --primary-light: #B8B5B1;
+  --primary-dark: #4A4845;
+  --accent: #C9B89A;
+  /* Warm champagne (wedding dress tone) */
+  --bg-cream: #F4F2EF;
+  /* Pearl white backdrop */
+  --text-dark: #2A2826;
+  --text-muted: #6B6966;
   --text-light: #FFFFFF;
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-dark: rgba(26, 22, 19, 0.72);
+  --glass-bg: rgba(245, 242, 239, 0.55);
+  --glass-border: rgba(220, 217, 213, 0.5);
+  --glass-dark: rgba(30, 28, 26, 0.72);
   --font-royal: 'Great Vibes', cursive;
   --font-serif: 'Cormorant Garamond', serif;
   --font-body: 'Lora', serif;
   --font-sans: 'Josefin Sans', sans-serif;
-  --shadow-sm: 0 4px 10px rgba(163, 138, 117, 0.1);
-  --shadow-md: 0 10px 30px rgba(163, 138, 117, 0.15);
-  --shadow-lg: 0 20px 50px rgba(44, 37, 32, 0.15);
+  --shadow-sm: 0 4px 10px rgba(74, 72, 69, 0.1);
+  --shadow-md: 0 10px 30px rgba(74, 72, 69, 0.15);
+  --shadow-lg: 0 20px 50px rgba(42, 40, 38, 0.18);
   --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -86,9 +86,15 @@ html {
 
 /* Spinner animation (fallback if Font Awesome loads async) */
 @keyframes fa-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
 .fa-spin {
   animation: fa-spin 1s linear infinite;
   display: inline-block;
@@ -232,8 +238,8 @@ body:not(.cover-active) #bg-video {
   justify-content: center;
   align-items: center;
   z-index: 50;
-  background-color: #12100e;
-  background-image: radial-gradient(circle at center, rgba(163, 138, 117, 0.15) 0%, transparent 80%), url('Foto Background/Frame1.webp');
+  background-color: #1a1918;
+  background-image: radial-gradient(circle at center, rgba(201, 184, 154, 0.12) 0%, transparent 80%), url('Foto Background/Frame1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -244,7 +250,7 @@ body:not(.cover-active) #bg-video {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(18, 16, 14, 0.55);
+  background: rgba(26, 25, 24, 0.50);
   z-index: 1;
 }
 
@@ -263,7 +269,7 @@ body:not(.cover-active) #bg-video {
   position: relative;
   width: 100%;
   height: 75vh;
-  border-radius: 40px;
+  border-radius: 80px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--glass-border);
@@ -299,7 +305,7 @@ body:not(.cover-active) #bg-video {
   height: 75vh;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 40px;
+  border-radius: 80px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   padding: 50px 30px;
@@ -411,7 +417,7 @@ body:not(.cover-active) #bg-video {
   letter-spacing: 2px;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 25px rgba(122, 98, 78, 0.25);
+  box-shadow: 0 8px 25px rgba(74, 72, 69, 0.22);
   transition: var(--transition);
   display: inline-flex;
   align-items: center;
@@ -421,12 +427,12 @@ body:not(.cover-active) #bg-video {
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(122, 98, 78, 0.35);
+  box-shadow: 0 15px 30px rgba(74, 72, 69, 0.30);
   background: linear-gradient(135deg, var(--primary-light), var(--primary));
 }
 
 .btn-primary.btn-cover {
-  background: linear-gradient(135deg, var(--primary-dark), #4a382a);
+  background: linear-gradient(135deg, var(--primary-dark), #2e2c2a);
 }
 
 .btn-small {
@@ -441,7 +447,7 @@ body:not(.cover-active) #bg-video {
   gap: 8px;
   margin-top: 15px;
   padding: 8px 20px;
-  background: rgba(163, 138, 117, 0.1);
+  background: rgba(138, 136, 133, 0.1);
   color: var(--primary-dark);
   border-radius: 30px;
   text-decoration: none;
@@ -506,7 +512,7 @@ body:not(.cover-active) #bg-video {
 .section-bg-pattern {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at center, rgba(163, 138, 117, 0.05) 0%, transparent 70%), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L45 15L30 30L15 15Z' fill='%23a38a75' fill-opacity='0.02'/%3E%3C/svg%3E");
+  background-image: radial-gradient(circle at center, rgba(138, 136, 133, 0.05) 0%, transparent 70%), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L45 15L30 30L15 15Z' fill='%238a8885' fill-opacity='0.025'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
 }
@@ -538,7 +544,7 @@ body:not(.cover-active) #bg-video {
 }
 
 .section-with-background {
-  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.75), rgba(250, 247, 242, 0.85)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.78), rgba(244, 242, 239, 0.88)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -548,14 +554,14 @@ body:not(.cover-active) #bg-video {
 .overlay-dark {
   position: absolute;
   inset: 0;
-  background: rgba(250, 247, 242, 0.6);
+  background: rgba(244, 242, 239, 0.6);
   z-index: 1;
 }
 
 .overlay-darker {
   position: absolute;
   inset: 0;
-  background: rgba(250, 247, 242, 0.85);
+  background: rgba(244, 242, 239, 0.88);
   z-index: 1;
 }
 
@@ -563,9 +569,9 @@ body:not(.cover-active) #bg-video {
   max-width: 650px;
   width: 100%;
   padding: 50px 40px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid var(--glass-border);
-  border-radius: 40px;
+  background: rgba(252, 251, 249, 0.78);
+  border: 1px solid rgba(220, 217, 213, 0.6);
+  border-radius: 80px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   box-shadow: var(--shadow-md);
@@ -633,8 +639,8 @@ body:not(.cover-active) #bg-video {
   height: 220px;
   border-radius: 20px;
   object-fit: cover;
-  border: 1px solid rgba(163, 138, 117, 0.25);
-  box-shadow: 0 10px 25px rgba(163, 138, 117, 0.15);
+  border: 1px solid rgba(184, 181, 177, 0.3);
+  box-shadow: 0 10px 25px rgba(74, 72, 69, 0.12);
   transition: transform 0.4s ease;
 }
 
@@ -823,11 +829,11 @@ body:not(.cover-active) #bg-video {
 }
 
 .countdown-item {
-  background: var(--text-light);
-  border: 1px solid rgba(163, 138, 117, 0.2);
+  background: rgba(252, 251, 249, 0.92);
+  border: 1px solid rgba(184, 181, 177, 0.3);
   width: 80px;
   height: 80px;
-  border-radius: 20px;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -871,16 +877,16 @@ body:not(.cover-active) #bg-video {
 .event-card {
   position: relative;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 60px;
   overflow: hidden;
   padding: 40px 30px;
   color: var(--text-dark);
   box-shadow: var(--shadow-lg);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(200, 177, 149, 0.45)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(135deg, rgba(252, 251, 249, 0.82), rgba(201, 184, 154, 0.35)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  border: 1px solid rgba(163, 138, 117, 0.25);
+  border: 1px solid rgba(184, 181, 177, 0.3);
   margin-bottom: 30px;
   transition: var(--transition);
 }
@@ -893,7 +899,7 @@ body:not(.cover-active) #bg-video {
 .event-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(250, 247, 242, 0.45);
+  background: rgba(244, 242, 239, 0.40);
   z-index: 1;
 }
 
@@ -1009,10 +1015,10 @@ body:not(.cover-active) #bg-video {
 }
 
 .timeline-content {
-  background: var(--text-light);
-  border: 1px solid rgba(163, 138, 117, 0.15);
+  background: rgba(252, 251, 249, 0.9);
+  border: 1px solid rgba(184, 181, 177, 0.25);
   padding: 30px;
-  border-radius: 25px;
+  border-radius: 40px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
@@ -1050,10 +1056,10 @@ body:not(.cover-active) #bg-video {
 
 /* Wedding Gift bank cards */
 .bank-card {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(252, 251, 249, 0.75);
   padding: 30px;
-  border-radius: 25px;
-  border: 1px solid rgba(163, 138, 117, 0.25);
+  border-radius: 40px;
+  border: 1px solid rgba(184, 181, 177, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   width: 100%;
@@ -1094,10 +1100,10 @@ body:not(.cover-active) #bg-video {
 /* Wishes & RSVP Form */
 .wishes-form {
   width: 100%;
-  background: var(--text-light);
-  border: 1px solid rgba(163, 138, 117, 0.15);
+  background: rgba(252, 251, 249, 0.92);
+  border: 1px solid rgba(184, 181, 177, 0.25);
   padding: 35px;
-  border-radius: 30px;
+  border-radius: 50px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -1124,9 +1130,9 @@ body:not(.cover-active) #bg-video {
   overflow-y: auto;
   margin-top: 30px;
   text-align: left;
-  background: var(--text-light);
-  border: 1px solid rgba(163, 138, 117, 0.15);
-  border-radius: 30px;
+  background: rgba(252, 251, 249, 0.92);
+  border: 1px solid rgba(184, 181, 177, 0.25);
+  border-radius: 40px;
   padding: 25px;
   box-shadow: var(--shadow-sm);
 }
@@ -1179,7 +1185,7 @@ body:not(.cover-active) #bg-video {
 
 /* Thank You Section */
 .slide-thankyou {
-  background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.8), rgba(250, 247, 242, 0.85)), url('Foto Background/Background.webp');
+  background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.82), rgba(244, 242, 239, 0.90)), url('Foto Background/Background.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1346,6 +1352,124 @@ body.cover-active .music-toggle {
   }
 }
 
+/* =============================================
+   Floral Slide Corner Decorations (Bunga Pink 5)
+   ============================================= */
+.slide {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Common top corner flower styling */
+.slide::before,
+.slide::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  width: 170px;
+  height: 170px;
+  background-image: url('Bunga/bungapink5.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 5;
+  /* berada di atas overlay section, di bawah box konten teks */
+  opacity: 0.92;
+  will-change: transform;
+}
+
+/* Left side floral positioning & sway */
+.slide::before {
+  left: -15px;
+  background-position: top left;
+  transform-origin: top left;
+  animation: windSwayLeft 7s ease-in-out infinite alternate;
+}
+
+/* Right side floral positioning & sway (mirrored) */
+.slide::after {
+  right: -15px;
+  background-position: top right;
+  transform-origin: top right;
+  animation: windSwayRight 8.5s ease-in-out infinite alternate;
+}
+
+/* Highly realistic multi-stage wind blowing animations */
+@keyframes windSwayLeft {
+  0% {
+    transform: rotate(0deg) translate(0px, 0px) scale(1);
+  }
+
+  30% {
+    transform: rotate(3deg) translate(2px, 4px) scale(1.02);
+  }
+
+  65% {
+    transform: rotate(-1.5deg) translate(-2px, 1px) scale(0.99);
+  }
+
+  100% {
+    transform: rotate(2deg) translate(1px, -1px) scale(1.01);
+  }
+}
+
+@keyframes windSwayRight {
+  0% {
+    transform: scaleX(-1) rotate(0deg) translate(0px, 0px) scale(1);
+  }
+
+  30% {
+    transform: scaleX(-1) rotate(3deg) translate(2px, 4px) scale(1.02);
+  }
+
+  65% {
+    transform: scaleX(-1) rotate(-1.5deg) translate(-2px, 1px) scale(0.99);
+  }
+
+  100% {
+    transform: scaleX(-1) rotate(2deg) translate(1px, -1px) scale(1.01);
+  }
+}
+
+/* Responsive adjustment for tablet/mobile viewports to prevent covering layout */
+@media (max-width: 768px) {
+
+  .slide::before,
+  .slide::after {
+    width: 100px;
+    height: 100px;
+    top: -10px;
+    opacity: 0.8;
+  }
+
+  .slide::before {
+    left: -10px;
+  }
+
+  .slide::after {
+    right: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .slide::before,
+  .slide::after {
+    width: 70px;
+    height: 70px;
+    top: -5px;
+    opacity: 0.7;
+  }
+
+  .slide::before {
+    left: -5px;
+  }
+
+  .slide::after {
+    right: -5px;
+  }
+}
+
 
 .butterfly-layer {
   position: fixed;
@@ -1427,11 +1551,6 @@ body.cover-active .music-toggle {
     padding: 60px 15px;
   }
 
-  .slide::before,
-  .slide::after {
-    width: 140px;
-    height: 140px;
-  }
 
   .content-box {
     padding: 40px 25px;
@@ -1503,7 +1622,7 @@ body.cover-active .music-toggle {
     flex: 0 0 140px;
     height: 180px;
     border-radius: 20px;
-    border: 1px solid rgba(163, 138, 117, 0.25);
-    box-shadow: 0 8px 20px rgba(163, 138, 117, 0.15);
+    border: 1px solid rgba(184, 181, 177, 0.3);
+    box-shadow: 0 8px 20px rgba(74, 72, 69, 0.12);
   }
 }
