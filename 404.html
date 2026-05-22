@@ -3,24 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Thoriq &amp; April — Undangan Digital</title>
-  <script>
-    // GitHub Pages SPA Trick
-    // When GitHub Pages can't find /invitation/nama-tamu, it serves this 404.html.
-    // We save the original path to sessionStorage and redirect to the base page.
-    // The base page (index.html via script.js) restores the path using history.replaceState,
-    // so the URL bar looks correct and the guest name is extracted properly.
-    (function () {
-      var path = window.location.pathname + window.location.search;
-      sessionStorage.setItem('spa_redirect_path', path);
-
-      // Redirect to the base /invitation/ page
-      // Change this if your repo structure is different
-      var base = window.location.origin + '/invitation/';
-      window.location.replace(base);
-    })();
-  </script>
+  <meta http-equiv="refresh" content="0; url=/">
 </head>
 <body>
-  <!-- Redirecting... -->
+  <p>Halaman tidak ditemukan. <a href="/">Kembali ke halaman utama</a>.</p>
 </body>
 </html>
