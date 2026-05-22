@@ -1,11 +1,39 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Get Guest Name from URL ?to=Name
-    const urlParams = new URLSearchParams(window.location.search);
-    const guestNameParam = urlParams.get('to');
+    // GitHub Pages SPA Trick: 404.html saves the original path, we restore it here
+    // so that the URL bar shows the real URL and getGuestNameFromPath() works correctly.
+    const savedSpaPath = sessionStorage.getItem('spa_redirect_path');
+    if (savedSpaPath) {
+        sessionStorage.removeItem('spa_redirect_path');
+        window.history.replaceState(null, null, savedSpaPath);
+    }
+
+    // 1. Get Guest Name from URL path: /invitation/nama+tamu
+    //    Falls back to query string ?to=Nama for backward compatibility
     const guestNameElement = document.getElementById('guest-name');
-    if (guestNameParam) {
-        guestNameElement.textContent = guestNameParam;
+
+    function toTitleCase(str) {
+        return str.replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function getGuestNameFromPath() {
+        const path = window.location.pathname;
+        // Match anything after /invitation/ in the path
+        const match = path.match(/\/invitation\/(.+)/);
+        if (match && match[1]) {
+            // Replace + with space, then decode %xx sequences
+            const decoded = decodeURIComponent(match[1].replace(/\+/g, ' '));
+            return toTitleCase(decoded.trim());
+        }
+        return null;
+    }
+
+    const guestFromPath = getGuestNameFromPath();
+    const guestFromQuery = new URLSearchParams(window.location.search).get('to');
+    const resolvedGuest = guestFromPath || guestFromQuery;
+
+    if (resolvedGuest && guestNameElement) {
+        guestNameElement.textContent = resolvedGuest;
     }
 
     // 2. Open Invitation Logic

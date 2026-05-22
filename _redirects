@@ -1,0 +1,6 @@
+# Cloudflare Pages URL Rewrite Rules
+# Rewrite /invitation/* ke index.html di root (tanpa mengubah URL di browser)
+# Kode 200 = rewrite, URL tetap terlihat sebagai /invitation/nama-tamu
+
+/invitation    /index.html  200
+/invitation/*  /index.html  200
