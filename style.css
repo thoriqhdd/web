@@ -239,7 +239,7 @@ body:not(.cover-active) #bg-video {
   align-items: center;
   z-index: 50;
   background-color: #1a1918;
-  background-image: radial-gradient(circle at center, rgba(201, 184, 154, 0.12) 0%, transparent 80%), url('Foto%20Background/Frame1.webp');
+  background-image: radial-gradient(circle at center, rgba(201, 184, 154, 0.12) 0%, transparent 80%), url('Foto%20Background/Frame1.PNG');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
