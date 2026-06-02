@@ -542,7 +542,54 @@ body:not(.cover-active) #bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Complete seamless fullscreen cover */
+  /* Complete seamless fullscreen cover on mobile */
+}
+
+@media (min-width: 901px) {
+  .hero-video {
+    object-fit: contain;
+    background-color: transparent;
+    z-index: 2;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8); /* Elegant shadow layer for the video */
+  }
+
+  .slide-hero {
+    background-color: #12100e; /* Cinematic dark background */
+    position: relative;
+  }
+}
+
+/* PC opening slide side backgrounds */
+.hero-bg-left,
+.hero-bg-right {
+  display: none; /* hidden on mobile by default */
+}
+
+@media (min-width: 901px) {
+  .hero-bg-left,
+  .hero-bg-right {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: calc((100vw - (100vh * 9 / 16)) / 2);
+    height: 100%;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-bg-left {
+    left: 0;
+    background-image: linear-gradient(rgba(26, 25, 24, 0.3), rgba(26, 25, 24, 0.3)), url('Foto Pasangan/MONO0357-Edit.webp');
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .hero-bg-right {
+    right: 0;
+    background-image: linear-gradient(rgba(26, 25, 24, 0.3), rgba(26, 25, 24, 0.3)), url('Foto Pasangan/MONO0360-Edit.webp');
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+  }
 }
 
 .slide-faded-video {
@@ -1258,8 +1305,8 @@ body:not(.cover-active) #bg-video {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  width: 55px;
-  height: 55px;
+  width: 48px; /* Slightly smaller on PC for elegant look */
+  height: 48px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--primary-dark);
@@ -1267,7 +1314,7 @@ body:not(.cover-active) #bg-video {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem; /* Proportional icon size */
   cursor: pointer;
   z-index: 100;
   box-shadow: var(--shadow-md);
@@ -1278,12 +1325,22 @@ body:not(.cover-active) #bg-video {
   animation-play-state: paused;
 }
 
+@media (max-width: 768px) {
+  .music-toggle {
+    bottom: 20px;
+    right: 20px;
+    width: 40px; /* Ultra-compact size on mobile to prevent blocking text/buttons */
+    height: 40px;
+    font-size: 0.9rem;
+  }
+}
+
 .music-toggle.playing {
   animation-play-state: running;
 }
 
 .music-toggle:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
   background: var(--text-light);
 }
 
@@ -1394,131 +1451,200 @@ body.cover-active .music-toggle {
 }
 
 /* =============================================
-   Floral Slide Corner Decorations (Bunga Pink 5)
+   Floral Slide Corner Decorations (Bunga Pink 5) — Enhanced Lush Edition
    ============================================= */
-.slide {
-  position: relative;
-  overflow: hidden;
-}
 
-/* Common top corner flower styling */
+/* Hide default pseudo-element flowers — replaced by richer JS-injected elements */
 .slide::before,
 .slide::after {
-  content: '';
+  display: none !important;
+}
+
+/* Base floral decoration element */
+.floral-corner {
   position: absolute;
-  top: -15px;
-  width: 170px;
-  height: 170px;
   background-image: url('Bunga/bungapink5.png');
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: 5;
-  /* berada di atas overlay section, di bawah box konten teks */
-  opacity: 0.92;
+  opacity: 0.9;
   will-change: transform;
 }
 
-/* Left side floral positioning & sway */
-.slide::before {
-  left: -15px;
+/* ---------- Top Left Corner (large, anchor flower) ---------- */
+.floral-corner.floral-top-left {
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
   background-position: top left;
   transform-origin: top left;
   animation: windSwayLeft 7s ease-in-out infinite alternate;
 }
 
-/* Right side floral positioning & sway (mirrored) */
-.slide::after {
-  right: -15px;
+/* ---------- Top Right Corner (mirrored) ---------- */
+.floral-corner.floral-top-right {
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
   background-position: top right;
+  transform: scaleX(-1);
   transform-origin: top right;
   animation: windSwayRight 8.5s ease-in-out infinite alternate;
 }
 
-/* Highly realistic multi-stage wind blowing animations */
+/* ---------- Bottom Left Corner (rotated upside-down) ---------- */
+.floral-corner.floral-bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  background-position: top left;
+  transform: rotate(180deg) scaleX(-1);
+  transform-origin: bottom left;
+  animation: windSwayBottomLeft 9s ease-in-out infinite alternate;
+  opacity: 0.75;
+}
+
+/* ---------- Bottom Right Corner (rotated upside-down mirrored) ---------- */
+.floral-corner.floral-bottom-right {
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-position: top left;
+  transform: rotate(180deg);
+  transform-origin: bottom right;
+  animation: windSwayBottomRight 10s ease-in-out infinite alternate;
+  opacity: 0.75;
+}
+
+/* ---------- Mid Left Accent (smaller, subtle) ---------- */
+.floral-corner.floral-mid-left {
+  top: 50%;
+  left: 0;
+  width: 90px;
+  height: 90px;
+  background-position: center left;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center left;
+  animation: windSwayMidLeft 11s ease-in-out infinite alternate;
+  opacity: 0.5;
+}
+
+/* ---------- Mid Right Accent (smaller, subtle, mirrored) ---------- */
+.floral-corner.floral-mid-right {
+  top: 50%;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  background-position: center right;
+  transform: translateY(-50%) rotate(-90deg) scaleX(-1);
+  transform-origin: center right;
+  animation: windSwayMidRight 12s ease-in-out infinite alternate;
+  opacity: 0.5;
+}
+
+/* ---- Wind Sway Keyframes ---- */
 @keyframes windSwayLeft {
-  0% {
-    transform: rotate(0deg) translate(0px, 0px) scale(1);
-  }
-
-  30% {
-    transform: rotate(3deg) translate(2px, 4px) scale(1.02);
-  }
-
-  65% {
-    transform: rotate(-1.5deg) translate(-2px, 1px) scale(0.99);
-  }
-
-  100% {
-    transform: rotate(2deg) translate(1px, -1px) scale(1.01);
-  }
+  0%   { transform: rotate(0deg) translate(0px, 0px) scale(1); }
+  30%  { transform: rotate(3deg) translate(2px, 4px) scale(1.02); }
+  65%  { transform: rotate(-1.5deg) translate(-2px, 1px) scale(0.99); }
+  100% { transform: rotate(2deg) translate(1px, -1px) scale(1.01); }
 }
 
 @keyframes windSwayRight {
-  0% {
-    transform: scaleX(-1) rotate(0deg) translate(0px, 0px) scale(1);
-  }
-
-  30% {
-    transform: scaleX(-1) rotate(3deg) translate(2px, 4px) scale(1.02);
-  }
-
-  65% {
-    transform: scaleX(-1) rotate(-1.5deg) translate(-2px, 1px) scale(0.99);
-  }
-
-  100% {
-    transform: scaleX(-1) rotate(2deg) translate(1px, -1px) scale(1.01);
-  }
+  0%   { transform: scaleX(-1) rotate(0deg) translate(0px, 0px) scale(1); }
+  30%  { transform: scaleX(-1) rotate(3deg) translate(2px, 4px) scale(1.02); }
+  65%  { transform: scaleX(-1) rotate(-1.5deg) translate(-2px, 1px) scale(0.99); }
+  100% { transform: scaleX(-1) rotate(2deg) translate(1px, -1px) scale(1.01); }
 }
 
-/* Responsive adjustment for tablet/mobile viewports to prevent covering layout */
-@media (max-width: 768px) {
+@keyframes windSwayBottomLeft {
+  0%   { transform: rotate(180deg) scaleX(-1) translate(0px, 0px) scale(1); }
+  35%  { transform: rotate(182deg) scaleX(-1) translate(3px, -2px) scale(1.02); }
+  70%  { transform: rotate(178deg) scaleX(-1) translate(-1px, 2px) scale(0.98); }
+  100% { transform: rotate(181deg) scaleX(-1) translate(1px, -1px) scale(1.01); }
+}
 
-  .slide::before,
-  .slide::after {
-    width: 100px;
-    height: 100px;
-    top: -10px;
+@keyframes windSwayBottomRight {
+  0%   { transform: rotate(180deg) translate(0px, 0px) scale(1); }
+  35%  { transform: rotate(183deg) translate(-2px, -3px) scale(1.03); }
+  70%  { transform: rotate(177deg) translate(2px, 1px) scale(0.97); }
+  100% { transform: rotate(181deg) translate(-1px, -1px) scale(1.01); }
+}
+
+@keyframes windSwayMidLeft {
+  0%   { transform: translateY(-50%) rotate(90deg) scale(1); }
+  50%  { transform: translateY(-48%) rotate(93deg) scale(1.04); }
+  100% { transform: translateY(-52%) rotate(88deg) scale(0.98); }
+}
+
+@keyframes windSwayMidRight {
+  0%   { transform: translateY(-50%) rotate(-90deg) scaleX(-1) scale(1); }
+  50%  { transform: translateY(-48%) rotate(-87deg) scaleX(-1) scale(1.04); }
+  100% { transform: translateY(-52%) rotate(-92deg) scaleX(-1) scale(0.98); }
+}
+
+/* ---- Responsive: Tablet ---- */
+@media (max-width: 768px) {
+  .floral-corner.floral-top-left,
+  .floral-corner.floral-top-right {
+    width: 110px;
+    height: 110px;
     opacity: 0.8;
   }
 
-  .slide::before {
-    left: -10px;
+  .floral-corner.floral-bottom-left,
+  .floral-corner.floral-bottom-right {
+    width: 90px;
+    height: 90px;
+    opacity: 0.6;
   }
 
-  .slide::after {
-    right: -10px;
+  .floral-corner.floral-mid-left,
+  .floral-corner.floral-mid-right {
+    width: 60px;
+    height: 60px;
+    opacity: 0.4;
   }
 }
 
+/* ---- Responsive: Small Mobile ---- */
 @media (max-width: 480px) {
-
-  .slide::before,
-  .slide::after {
-    width: 70px;
-    height: 70px;
-    top: -5px;
+  .floral-corner.floral-top-left,
+  .floral-corner.floral-top-right {
+    width: 80px;
+    height: 80px;
     opacity: 0.7;
   }
 
-  .slide::before {
-    left: -5px;
+  .floral-corner.floral-bottom-left,
+  .floral-corner.floral-bottom-right {
+    width: 65px;
+    height: 65px;
+    opacity: 0.5;
   }
 
-  .slide::after {
-    right: -5px;
+  .floral-corner.floral-mid-left,
+  .floral-corner.floral-mid-right {
+    display: none; /* Hide mid accents on very small screens to avoid clutter */
   }
 }
 
+/* Exclude slide-hero from showing floral decorations (opening video slide) */
+.slide-hero .floral-corner {
+  display: none;
+}
 
 .butterfly-layer {
-  position: fixed;
+  position: absolute; /* Bound to the page background so they scroll naturally away */
   inset: 0;
   pointer-events: none;
-  /* place behind page content but above background video (-2) */
-  z-index: -1;
-  overflow: visible;
+  z-index: 4;
+  overflow: hidden; /* Prevent extra page horizontal scroll during active spawn */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.9s ease, visibility 0.9s ease;
@@ -1530,8 +1656,7 @@ body.cover-active .music-toggle {
 }
 
 .butterfly {
-  position: fixed;
-  /* fixed so it stays in viewport while scrolling */
+  position: absolute; /* absolute position so they pin to the background coordinates */
   display: block;
   pointer-events: none;
   will-change: left, top, transform, opacity;
@@ -1628,16 +1753,44 @@ body.cover-active .music-toggle {
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 160px;
-    gap: 10px;
+    grid-auto-rows: 140px; /* Optimal row height for compact & stunning mobile displays */
+    gap: 12px;
   }
 
+  /* Elegant asymmetrical collage structure to avoid any grid holes or empty slots */
   .gallery-grid img:nth-child(1) {
+    grid-row: span 2;
+    grid-column: span 1;
+  }
+
+  .gallery-grid img:nth-child(2) {
     grid-row: span 1;
+    grid-column: span 1;
+  }
+
+  .gallery-grid img:nth-child(3) {
+    grid-row: span 1;
+    grid-column: span 1;
   }
 
   .gallery-grid img:nth-child(4) {
-    grid-column: span 2;
+    grid-row: span 1;
+    grid-column: span 2; /* Beautiful full-width divider image in the middle */
+  }
+
+  .gallery-grid img:nth-child(5) {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+
+  .gallery-grid img:nth-child(6) {
+    grid-row: span 2;
+    grid-column: span 1; /* Symmetrical tall image on the right side of the bottom block */
+  }
+
+  .gallery-grid img:nth-child(7) {
+    grid-row: span 1;
+    grid-column: span 1;
   }
 
   .timeline {
@@ -1665,5 +1818,53 @@ body.cover-active .music-toggle {
     border-radius: 20px;
     border: 1px solid rgba(184, 181, 177, 0.3);
     box-shadow: 0 8px 20px rgba(74, 72, 69, 0.12);
+  }
+}
+
+/* Premium Scroll Down Indicator */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s ease;
+  pointer-events: none;
+}
+
+.scroll-down-indicator.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.scroll-text {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+}
+
+.chevron-bounce {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+  animation: chevronBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes chevronBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
   }
 }

@@ -127,11 +127,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const butterflyLayer = document.getElementById('butterfly-layer');
     const butterflySrc = 'Foto Background/Kupu-kupu.gif';
 
-    const createButterfly = () => {
-        if (!butterflyLayer) return;
+    // Inject butterfly-layer into every slide dynamically (if not already present in HTML)
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(slide => {
+        if (!slide.querySelector('.butterfly-layer')) {
+            const layer = document.createElement('div');
+            layer.className = 'butterfly-layer hidden';
+            layer.setAttribute('aria-hidden', 'true');
+            // Insert at the beginning of the slide so it positions correctly
+            slide.insertBefore(layer, slide.firstChild);
+        }
+    });
+
+    // Inject lush floral decorations into every slide (except slide-hero)
+    const floralPositions = [
+        'floral-top-left', 'floral-top-right',
+        'floral-bottom-left', 'floral-bottom-right',
+        'floral-mid-left', 'floral-mid-right'
+    ];
+    slides.forEach(slide => {
+        if (slide.classList.contains('slide-hero')) return; // Skip opening video slide
+        if (slide.querySelector('.floral-corner')) return; // Already injected
+        floralPositions.forEach(pos => {
+            const flower = document.createElement('div');
+            flower.className = `floral-corner ${pos}`;
+            flower.setAttribute('aria-hidden', 'true');
+            slide.appendChild(flower);
+        });
+    });
+
+    // Helper to create a butterfly in a specific layer
+    const createButterflyInLayer = (layer) => {
+        if (!layer) return;
 
         const butterfly = document.createElement('img');
         butterfly.classList.add('butterfly');
@@ -139,9 +168,9 @@ document.addEventListener("DOMContentLoaded", () => {
         butterfly.alt = '';
         butterfly.setAttribute('aria-hidden', 'true');
 
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const size = Math.floor(Math.random() * 22 + 26); // px
+        const vw = layer.clientWidth || window.innerWidth;
+        const vh = layer.clientHeight || window.innerHeight;
+        const size = Math.floor(Math.random() * 20 + 24); // elegant size
         butterfly.style.width = `${size}px`;
 
         // Choose a spawn edge and opposite exit edge
@@ -174,14 +203,13 @@ document.addEventListener("DOMContentLoaded", () => {
         butterfly.style.left = `${startX}px`;
         butterfly.style.top = `${startY}px`;
 
-        // Natural mid control point with some randomness
         const midX = startX + (endX - startX) * (0.3 + Math.random() * 0.4) + (Math.random() * vw * 0.06 - vw * 0.03);
         const midY = startY + (endY - startY) * (0.3 + Math.random() * 0.4) + (Math.random() * vh * 0.08 - vh * 0.04);
 
-        const duration = Math.floor(8000 + Math.random() * 12000); // ms
-        const delay = Math.random() * 800;
+        const duration = Math.floor(8000 + Math.random() * 10000); // smooth cinematic flight
+        const delay = Math.random() * 600;
 
-        butterflyLayer.appendChild(butterfly);
+        layer.appendChild(butterfly);
 
         const rotate1 = (Math.random() * 40 - 20).toFixed(1);
         const rotate2 = (Math.random() * 40 - 20).toFixed(1);
@@ -199,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fill: 'forwards'
         });
 
-        // subtle continuous wing flutter using CSS animation overlay
+        // wing flutter using CSS animation overlay
         butterfly.style.animation = `flutter ${Math.max(3, duration / 1000)}s ease-in-out infinite`;
 
         anim.onfinish = () => {
@@ -207,34 +235,105 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
-    const showButterflies = () => {
-        if (!butterflyLayer) return;
-        butterflyLayer.classList.remove('hidden');
-        butterflyLayer.classList.add('visible');
+    // Start/Stop butterfly spawn logic for a specific slide
+    const startSlideButterflies = (slide, layer) => {
+        if (!layer) return;
+        layer.classList.remove('hidden');
+        layer.classList.add('visible');
 
-        for (let i = 0; i < 10; i += 1) {
-            setTimeout(createButterfly, i * 300);
+        // Spawn initial burst
+        for (let i = 0; i < 6; i++) {
+            setTimeout(() => {
+                if (layer.classList.contains('visible')) {
+                    createButterflyInLayer(layer);
+                }
+            }, i * 350);
         }
 
-        if (!window.butterflyInterval) {
-            window.butterflyInterval = setInterval(createButterfly, 1800);
+        // Setup periodic spawning
+        if (!slide.butterflyInterval) {
+            slide.butterflyInterval = setInterval(() => {
+                if (layer.classList.contains('visible')) {
+                    createButterflyInLayer(layer);
+                }
+            }, 2500);
         }
     };
 
-    // Start butterflies immediately as background so GIF is visible without waiting
-    // for the hero video to end. This also keeps the background alive while user
-    // scrolls across the site.
-    setTimeout(() => {
-        try { showButterflies(); } catch (e) { /* silent */ }
-    }, 700);
+    const stopSlideButterflies = (slide, layer) => {
+        if (slide.butterflyInterval) {
+            clearInterval(slide.butterflyInterval);
+            slide.butterflyInterval = null;
+        }
+        if (layer) {
+            layer.classList.remove('visible');
+            layer.classList.add('hidden');
+            layer.innerHTML = ''; // Clean up existing elements to save memory
+        }
+    };
 
-    // Listen for hero video end to trigger butterflies
+    // Control flag for opening slide video ending
+    window.heroVideoEnded = false;
+
+    // IntersectionObserver to dynamically handle butterflies based on user viewport scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // trigger when 15% of the slide is on screen
+    };
+
+    const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const slide = entry.target;
+            const layer = slide.querySelector('.butterfly-layer');
+            if (!layer) return;
+
+            if (entry.isIntersecting) {
+                // Slide 1 (slide-hero) only spawns butterflies after the opening video ends
+                if (slide.classList.contains('slide-hero')) {
+                    if (window.heroVideoEnded) {
+                        startSlideButterflies(slide, layer);
+                    }
+                } else {
+                    startSlideButterflies(slide, layer);
+                }
+            } else {
+                stopSlideButterflies(slide, layer);
+            }
+        });
+    }, observerOptions);
+
+    slides.forEach(slide => slideObserver.observe(slide));
+
+    // Listen for hero video end to trigger butterflies and scroll indicator
     if (heroVideo) {
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
-            showButterflies();
+
+            // Set flag so hero slide observer knows video has ended
+            window.heroVideoEnded = true;
+
+            // Instantly start butterflies on Slide 1
+            const heroSlide = document.querySelector('.slide-hero');
+            if (heroSlide) {
+                const layer = heroSlide.querySelector('.butterfly-layer');
+                startSlideButterflies(heroSlide, layer);
+            }
+
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.classList.add('show');
+            }
         });
     }
+
+    // Hide scroll indicator on user scroll
+    window.addEventListener('scroll', () => {
+        const scrollIndicator = document.getElementById('scroll-indicator');
+        if (scrollIndicator && window.scrollY > 20) {
+            scrollIndicator.classList.remove('show');
+        }
+    }, { passive: true });
 
     // Music play/pause (mute/unmute) toggle
     if (musicToggle && bgMusic) {

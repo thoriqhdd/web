@@ -33,7 +33,6 @@
 </head>
 
 <body>
-  <div id="butterfly-layer" class="butterfly-layer hidden" aria-hidden="true"></div>
 
   <!-- Audio element for background music -->
   <audio id="bg-music" loop>
@@ -71,10 +70,19 @@
 
     <!-- Slide 1: Spacer to show the full video playing -->
     <section class="slide slide-hero">
+      <div id="butterfly-layer" class="butterfly-layer hidden" aria-hidden="true"></div>
+      <div class="hero-bg-left"></div>
       <video id="hero-video" muted playsinline preload="none" class="hero-video">
         <source src="./VideoOpeningSlide1/OpeningVideo.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
+      <div class="hero-bg-right"></div>
+
+      <!-- Scroll Indicator -->
+      <div id="scroll-indicator" class="scroll-down-indicator">
+        <span class="scroll-text">Scroll Down</span>
+        <i class="fas fa-chevron-down chevron-bounce"></i>
+      </div>
     </section>
 
     <!-- Slide 2: QS Ar Rum -->
@@ -183,7 +191,8 @@
           <div class="event-content">
             <h3 class="event-title">Resepsi</h3>
             <p class="event-date">Sabtu, 20 Juni 2026</p>
-            <p class="event-time"><i class="far fa-clock"></i> 11:00 - 16:00 WIB</p>
+            <p class="event-time"><i class="far fa-clock"></i> Sesi I : 11:00 - 13:30 WIB</p>
+            <p class="event-time"><i class="far fa-clock"></i> Sesi II : 13:30 - 16:00 WIB</p>
             <p class="event-location"><i class="fas fa-map-marker-alt"></i> Gedung Aula SMKN 26 Jakarta</p>
             <p class="event-location">Jl. Balai Pustaka Baru I No.2 RT 02/07, Rawamangun, Kec. Pulo Gadung, Jakarta
               Timur</p>
