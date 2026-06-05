@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Inject lush floral decorations into every slide (except slide-hero)
     const floralPositions = [
-        'floral-top-left', 'floral-top-right',
         'floral-bottom-left', 'floral-bottom-right',
         'floral-mid-left', 'floral-mid-right'
     ];

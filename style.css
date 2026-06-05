@@ -1732,7 +1732,7 @@ body.cover-active .music-toggle {
   width: 180px;
   height: 180px;
   background-position: top left;
-  transform-origin: top left;
+  transform-origin: center;
   animation: windSwayLeft 7s ease-in-out infinite alternate;
 }
 
@@ -1744,7 +1744,7 @@ body.cover-active .music-toggle {
   height: 180px;
   background-position: top right;
   transform: scaleX(-1);
-  transform-origin: top right;
+  transform-origin: center;
   animation: windSwayRight 8.5s ease-in-out infinite alternate;
 }
 
@@ -1756,7 +1756,7 @@ body.cover-active .music-toggle {
   height: 150px;
   background-position: top left;
   transform: rotate(180deg) scaleX(-1);
-  transform-origin: bottom left;
+  transform-origin: center;
   animation: windSwayBottomLeft 9s ease-in-out infinite alternate;
   opacity: 0.75;
 }
@@ -1769,7 +1769,7 @@ body.cover-active .music-toggle {
   height: 150px;
   background-position: top left;
   transform: rotate(180deg);
-  transform-origin: bottom right;
+  transform-origin: center;
   animation: windSwayBottomRight 10s ease-in-out infinite alternate;
   opacity: 0.75;
 }
@@ -1782,7 +1782,7 @@ body.cover-active .music-toggle {
   height: 90px;
   background-position: center left;
   transform: translateY(-50%) rotate(90deg);
-  transform-origin: center left;
+  transform-origin: center;
   animation: windSwayMidLeft 11s ease-in-out infinite alternate;
   opacity: 0.5;
 }
@@ -1795,7 +1795,7 @@ body.cover-active .music-toggle {
   height: 90px;
   background-position: center right;
   transform: translateY(-50%) rotate(-90deg) scaleX(-1);
-  transform-origin: center right;
+  transform-origin: center;
   animation: windSwayMidRight 12s ease-in-out infinite alternate;
   opacity: 0.5;
 }
@@ -1845,23 +1845,23 @@ body.cover-active .music-toggle {
 @media (max-width: 768px) {
   .floral-corner.floral-top-left,
   .floral-corner.floral-top-right {
-    width: 110px;
-    height: 110px;
-    opacity: 0.8;
+    width: 120px;
+    height: 120px;
+    opacity: 0.9;
   }
 
   .floral-corner.floral-bottom-left,
   .floral-corner.floral-bottom-right {
-    width: 90px;
-    height: 90px;
-    opacity: 0.6;
+    width: 100px;
+    height: 100px;
+    opacity: 0.8;
   }
 
   .floral-corner.floral-mid-left,
   .floral-corner.floral-mid-right {
-    width: 60px;
-    height: 60px;
-    opacity: 0.4;
+    width: 70px;
+    height: 70px;
+    opacity: 0.6;
   }
 }
 
@@ -1869,21 +1869,24 @@ body.cover-active .music-toggle {
 @media (max-width: 480px) {
   .floral-corner.floral-top-left,
   .floral-corner.floral-top-right {
-    width: 80px;
-    height: 80px;
-    opacity: 0.7;
+    width: 90px;
+    height: 90px;
+    opacity: 0.95;
   }
 
   .floral-corner.floral-bottom-left,
   .floral-corner.floral-bottom-right {
-    width: 65px;
-    height: 65px;
-    opacity: 0.5;
+    width: 80px;
+    height: 80px;
+    opacity: 0.85;
   }
 
   .floral-corner.floral-mid-left,
   .floral-corner.floral-mid-right {
-    display: none; /* Hide mid accents on very small screens to avoid clutter */
+    display: block !important;
+    width: 60px;
+    height: 60px;
+    opacity: 0.7;
   }
 }
 
