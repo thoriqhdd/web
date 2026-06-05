@@ -707,9 +707,21 @@
     }
 
     @keyframes pinShake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-6px); }
-      40%, 80% { transform: translateX(6px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20%,
+      60% {
+        transform: translateX(-6px);
+      }
+
+      40%,
+      80% {
+        transform: translateX(6px);
+      }
     }
 
     .pin-error-msg {
@@ -748,6 +760,7 @@
     .btn-row-wa {
       background: #198754;
     }
+
     .btn-row-wa:hover {
       background: #157347;
     }
@@ -755,6 +768,7 @@
     .btn-row-fb {
       background: #0d6efd;
     }
+
     .btn-row-fb:hover {
       background: #0b5ed7;
     }
@@ -762,6 +776,7 @@
     .btn-row-link {
       background: #212529;
     }
+
     .btn-row-link:hover {
       background: #1c1f23;
     }
@@ -770,6 +785,7 @@
       background: #ffc107;
       color: #000;
     }
+
     .btn-row-text:hover {
       background: #ffca2c;
     }
@@ -777,6 +793,7 @@
     .btn-row-delete {
       background: #dc3545;
     }
+
     .btn-row-delete:hover {
       background: #bb2d3b;
     }
@@ -814,7 +831,9 @@
         </div>
 
         <div class="form-group">
-          <label for="guest-name-input">Nama Tamu Undangan <span style="font-weight:400;font-size:0.7rem;letter-spacing:0;text-transform:none;color:var(--text-muted)">(pisahkan dengan Enter untuk multi-nama)</span></label>
+          <label for="guest-name-input">Nama Tamu Undangan <span
+              style="font-weight:400;font-size:0.7rem;letter-spacing:0;text-transform:none;color:var(--text-muted)">(pisahkan
+              dengan Enter untuk multi-nama)</span></label>
           <textarea id="guest-name-input" class="form-input" rows="5" placeholder="Contoh:
 Budi Santoso
 Ahmad Fauzi
@@ -856,15 +875,19 @@ Siti Nurhaliza" style="resize:vertical;min-height:80px"></textarea>
       <div class="card" id="generated-list-card" style="display:none">
         <div class="preview-header">
           <h2>Daftar Nama Tamu</h2>
-          <span id="generated-count-badge" style="font-size:0.7rem;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:rgba(138,136,133,0.1);padding:2px 8px;border-radius:8px;">0 tamu</span>
+          <span id="generated-count-badge"
+            style="font-size:0.7rem;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:rgba(138,136,133,0.1);padding:2px 8px;border-radius:8px;">0
+            tamu</span>
         </div>
         <div class="table-container" style="max-height:420px;overflow-y:auto">
           <table>
-            <thead><tr>
-              <th style="width:40px;text-align:center">No</th>
-              <th>Tamu</th>
-              <th>Opsi</th>
-            </tr></thead>
+            <thead>
+              <tr>
+                <th style="width:40px;text-align:center">No</th>
+                <th>Tamu</th>
+                <th>Opsi</th>
+              </tr>
+            </thead>
             <tbody id="generated-guests-body"></tbody>
           </table>
         </div>
@@ -1356,7 +1379,7 @@ Bapak Herman & Ibu Ros Pandan`;
       }
 
       isGenerated = true;
-      
+
       // Show list card and render
       if (generatedListCard) {
         generatedListCard.style.display = "block";
