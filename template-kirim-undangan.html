@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator Kirim Undangan — Thoriq & April</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #8A8885;
+      /* Elegant silver-grey */
+      --primary-light: #B8B5B1;
+      --primary-dark: #4A4845;
+      --accent: #C9B89A;
+      /* Warm champagne */
+      --bg-cream: #F4F2EF;
+      /* Pearl white backdrop */
+      --text-dark: #2A2826;
+      --text-muted: #6B6966;
+      --text-light: #FFFFFF;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(220, 217, 213, 0.6);
+      --font-royal: 'Great Vibes', cursive;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-body: 'Lora', serif;
+      --font-sans: 'Josefin Sans', sans-serif;
+      --shadow-sm: 0 4px 10px rgba(74, 72, 69, 0.05);
+      --shadow-md: 0 10px 30px rgba(74, 72, 69, 0.1);
+      --shadow-lg: 0 20px 50px rgba(42, 40, 38, 0.12);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      background-image: linear-gradient(to bottom, rgba(244, 242, 239, 0.85), rgba(244, 242, 239, 0.95)), url('Foto%20Background/Background.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    header h1 em {
+      font-family: var(--font-royal);
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+      line-height: 1.1;
+    }
+
+    header p {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Layout Grid */
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    @media (min-width: 850px) {
+      .generator-grid {
+        grid-template-columns: 1.1fr 1.9fr;
+      }
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 20px;
+      height: 20px;
+      border-top: 1px solid var(--primary-light);
+      border-left: 1px solid var(--primary-light);
+      opacity: 0.5;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 20px;
+      height: 20px;
+      border-bottom: 1px solid var(--primary-light);
+      border-right: 1px solid var(--primary-light);
+      opacity: 0.5;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(138, 136, 133, 0.3);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201, 184, 154, 0.2);
+    }
+
+    select.form-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='%236B6966' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+
+    /* Preview Container */
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--glass-border);
+      padding-bottom: 10px;
+    }
+
+    .preview-header h2 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+    }
+
+    .preview-area-container {
+      position: relative;
+    }
+
+    .preview-area {
+      width: 100%;
+      height: 380px;
+      padding: 20px;
+      border: 1px solid rgba(138, 136, 133, 0.2);
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.6);
+      overflow-y: auto;
+      white-space: pre-wrap;
+      outline: none;
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    /* Actions */
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 160px;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn-generate {
+      background: linear-gradient(135deg, var(--accent), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(201, 184, 154, 0.22);
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-generate:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(74, 72, 69, 0.25);
+    }
+
+    .btn-copy {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(138, 136, 133, 0.2);
+    }
+
+    .btn-copy:hover {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      transform: translateY(-2px);
+    }
+
+    .btn-wa {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    }
+
+    .btn-wa:hover {
+      background: linear-gradient(135deg, #34e073, #169e8f);
+      transform: translateY(-2px);
+    }
+
+    /* Database Table styling */
+    .dashboard-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dashboard-title span {
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .db-status-badge {
+      font-size: 0.7rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .db-status-local {
+      background: rgba(138, 136, 133, 0.1);
+      color: var(--primary-dark);
+    }
+
+    .db-status-cloud {
+      background: rgba(22, 163, 74, 0.1);
+      color: #16a34a;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .stat-widget {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    /* Search bar inside dashboard */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-wrapper i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid rgba(138, 136, 133, 0.2);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.8);
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201, 184, 154, 0.15);
+    }
+
+    /* Responsive Table */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.75);
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    thead {
+      background: rgba(138, 136, 133, 0.08);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    th {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary-dark);
+      padding: 14px 18px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(220, 217, 213, 0.4);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    td {
+      padding: 14px 18px;
+      color: var(--text-dark);
+      vertical-align: middle;
+    }
+
+    td.td-name {
+      font-weight: 500;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+    }
+
+    .badge-count {
+      display: inline-block;
+      background: rgba(138, 136, 133, 0.15);
+      color: var(--primary-dark);
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+    }
+
+    td.td-date {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .empty-state i {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      opacity: 0.3;
+      display: block;
+    }
+
+    /* Toast Alert notification */
+    .toast-container {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(42, 40, 38, 0.95);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      box-shadow: var(--shadow-lg);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+    }
+
+    .toast-container.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-container i {
+      color: #25D366;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      transition: var(--transition);
+    }
+
+    .back-btn:hover {
+      color: var(--accent);
+      transform: translateX(-4px);
+    }
+
+    /* Template Radio Cards */
+    .template-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .template-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .template-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .template-card-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 10px;
+      border: 1.5px solid rgba(138, 136, 133, 0.3);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .template-card input[type="radio"]:checked+.template-card-inner {
+      border-color: var(--accent);
+      background: rgba(201, 184, 154, 0.12);
+      box-shadow: 0 0 0 3px rgba(201, 184, 154, 0.18);
+    }
+
+    .template-card-inner:hover {
+      border-color: var(--accent);
+      background: rgba(201, 184, 154, 0.08);
+    }
+
+    .template-card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(138, 136, 133, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--primary-dark);
+      transition: var(--transition);
+    }
+
+    .template-card input[type="radio"]:checked+.template-card-inner .template-card-icon {
+      background: var(--accent);
+      color: white;
+    }
+
+    .template-card-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--primary-dark);
+      line-height: 1.3;
+    }
+
+    /* PIN Gate for Dashboard */
+    .pin-gate {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(244, 242, 239, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .pin-gate-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(138, 136, 133, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+    }
+
+    .pin-gate h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .pin-gate p {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pin-input-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .pin-digit {
+      width: 48px;
+      height: 56px;
+      border: 1.5px solid rgba(138, 136, 133, 0.3);
+      border-radius: 12px;
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--primary-dark);
+      background: rgba(255, 255, 255, 0.8);
+      outline: none;
+      transition: var(--transition);
+      -moz-appearance: textfield;
+    }
+
+    .pin-digit::-webkit-outer-spin-button,
+    .pin-digit::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .pin-digit:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201, 184, 154, 0.2);
+    }
+
+    .pin-digit.error {
+      border-color: #dc2626;
+      animation: pinShake 0.4s ease;
+    }
+
+    .pin-digit.success {
+      border-color: #16a34a;
+      background: rgba(22, 163, 74, 0.06);
+    }
+
+    @keyframes pinShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .pin-error-msg {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: #dc2626;
+      height: 20px;
+      transition: opacity 0.3s;
+    }
+
+    #db-dashboard-content {
+      display: block;
+    }
+
+    /* Row Action Buttons styling */
+    .btn-row-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-row-action i {
+      font-size: 0.8rem;
+    }
+
+    .btn-row-wa {
+      background: #198754;
+    }
+    .btn-row-wa:hover {
+      background: #157347;
+    }
+
+    .btn-row-fb {
+      background: #0d6efd;
+    }
+    .btn-row-fb:hover {
+      background: #0b5ed7;
+    }
+
+    .btn-row-link {
+      background: #212529;
+    }
+    .btn-row-link:hover {
+      background: #1c1f23;
+    }
+
+    .btn-row-text {
+      background: #ffc107;
+      color: #000;
+    }
+    .btn-row-text:hover {
+      background: #ffca2c;
+    }
+
+    .btn-row-delete {
+      background: #dc3545;
+    }
+    .btn-row-delete:hover {
+      background: #bb2d3b;
+    }
+
+    .guest-action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <a href="/index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali ke Undangan</a>
+
+    <header>
+      <p>Tooling & Administration</p>
+      <h1>Template Kirim Undangan <em>Thoriq & April</em></h1>
+    </header>
+
+    <div class="generator-grid">
+      <!-- Input Card -->
+      <div class="card">
+        <div class="form-group">
+          <label for="title-select">Panggilan / Title</label>
+          <select id="title-select" class="form-input">
+            <option value="Bapak/Ibu/Saudara/i">Bapak/Ibu/Saudara/i</option>
+            <option value="Bapak">Bapak</option>
+            <option value="Ibu">Ibu</option>
+            <option value="Saudara">Saudara</option>
+            <option value="Saudari">Saudari</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-name-input">Nama Tamu Undangan <span style="font-weight:400;font-size:0.7rem;letter-spacing:0;text-transform:none;color:var(--text-muted)">(pisahkan dengan Enter untuk multi-nama)</span></label>
+          <textarea id="guest-name-input" class="form-input" rows="5" placeholder="Contoh:
+Budi Santoso
+Ahmad Fauzi
+Siti Nurhaliza" style="resize:vertical;min-height:80px"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Versi Undangan</label>
+          <div class="template-cards">
+            <label class="template-card">
+              <input type="radio" name="template-version" id="tpl-pengantin" value="pengantin" checked>
+              <div class="template-card-inner">
+                <div class="template-card-icon"><i class="fas fa-heart"></i></div>
+                <span class="template-card-label">Versi Pengantin</span>
+              </div>
+            </label>
+            <label class="template-card">
+              <input type="radio" name="template-version" id="tpl-orangtua" value="orangtua">
+              <div class="template-card-inner">
+                <div class="template-card-icon"><i class="fas fa-users"></i></div>
+                <span class="template-card-label">Versi Orang Tua</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button id="btn-generate" class="btn btn-generate">
+          <i class="fas fa-magic"></i> Generate Undangan
+        </button>
+
+        <div
+          style="margin-top: 25px; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--glass-border); padding-top: 15px;">
+          <p><i class="fas fa-info-circle" style="color: var(--accent); margin-right: 4px;"></i> Hitungan database
+            (counter) hanya bertambah saat Anda mengeklik tombol <strong>Generate Undangan</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Generated Guest List Card -->
+      <div class="card" id="generated-list-card" style="display:none">
+        <div class="preview-header">
+          <h2>Daftar Nama Tamu</h2>
+          <span id="generated-count-badge" style="font-size:0.7rem;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:rgba(138,136,133,0.1);padding:2px 8px;border-radius:8px;">0 tamu</span>
+        </div>
+        <div class="table-container" style="max-height:420px;overflow-y:auto">
+          <table>
+            <thead><tr>
+              <th style="width:40px;text-align:center">No</th>
+              <th>Tamu</th>
+              <th>Opsi</th>
+            </tr></thead>
+            <tbody id="generated-guests-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats & Database Dashboard -->
+    <div class="card" style="margin-bottom: 40px; position: relative; min-height: 350px;">
+
+      <!-- PIN Gate -->
+      <div id="db-pin-gate" class="pin-gate">
+        <div class="pin-gate-icon"><i class="fas fa-lock"></i></div>
+        <h3>Database Terkunci</h3>
+        <p>Masukkan PIN 4 digit untuk melihat data tamu</p>
+        <div class="pin-input-row">
+          <input type="number" class="pin-digit" id="pin-1" maxlength="1" min="0" max="9" autocomplete="off">
+          <input type="number" class="pin-digit" id="pin-2" maxlength="1" min="0" max="9" autocomplete="off">
+          <input type="number" class="pin-digit" id="pin-3" maxlength="1" min="0" max="9" autocomplete="off">
+          <input type="number" class="pin-digit" id="pin-4" maxlength="1" min="0" max="9" autocomplete="off">
+        </div>
+        <div class="pin-error-msg" id="pin-error-msg"></div>
+      </div>
+
+      <!-- Dashboard Content (hidden until PIN) -->
+      <div id="db-dashboard-content">
+        <div
+          style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+          <h2 class="dashboard-title" style="margin-bottom: 0;">
+            Database Tamu Ter-generate
+          </h2>
+          <span id="db-status" class="db-status-badge db-status-local">
+            <i class="fas fa-database"></i> Database Lokal
+          </span>
+        </div>
+
+        <!-- Statistics Widgets -->
+        <div class="stats-row">
+          <div class="stat-widget">
+            <div class="stat-num" id="stat-unique-guests">0</div>
+            <div class="stat-label">Tamu Unik</div>
+          </div>
+          <div class="stat-widget">
+            <div class="stat-num" id="stat-total-generates">0</div>
+            <div class="stat-label">Total Generasi</div>
+          </div>
+        </div>
+
+        <!-- Search Field -->
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-guest" class="search-input"
+            placeholder="Cari nama tamu yang sudah digenerate...">
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-container">
+          <table id="guest-table">
+            <thead>
+              <tr>
+                <th style="width: 50px; text-align: center;">No</th>
+                <th>Panggilan</th>
+                <th>Nama Tamu</th>
+                <th style="width: 120px; text-align: center;">Jml Generate</th>
+                <th style="width: 220px;">Terakhir Digenerate</th>
+              </tr>
+            </thead>
+            <tbody id="guest-table-body">
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Memuat data...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-container">
+    <i class="fas fa-check-circle"></i>
+    <span id="toast-message">Teks berhasil disalin!</span>
+  </div>
+
+  <!-- Firebase Script Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, setDoc, increment, serverTimestamp, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAC-EOsxEMJ3sxUuCqVn25Do8jCqSv6T-A",
+      authDomain: "undangan-thoriq-april.firebaseapp.com",
+      projectId: "undangan-thoriq-april",
+      storageBucket: "undangan-thoriq-april.firebasestorage.app",
+      messagingSenderId: "344738743208",
+      appId: "1:344738743208:web:9885105d67fbc1c377939d",
+      measurementId: "G-3H30LQM5Y6"
+    };
+
+    // Initialize Firebase
+    let db = null;
+    try {
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+    } catch (error) {
+      console.warn("Firebase initialization skipped or failed. Using LocalStorage fallback:", error);
+    }
+
+    // Elements
+    const titleSelect = document.getElementById("title-select");
+    const guestNameInput = document.getElementById("guest-name-input");
+    const templateRadios = document.querySelectorAll('input[name="template-version"]');
+    const getTemplateType = () => document.querySelector('input[name="template-version"]:checked')?.value || 'pengantin';
+    const btnGenerate = document.getElementById("btn-generate");
+
+    const generatedListCard = document.getElementById("generated-list-card");
+    const generatedCountBadge = document.getElementById("generated-count-badge");
+    const generatedGuestsBody = document.getElementById("generated-guests-body");
+
+    const statUnique = document.getElementById("stat-unique-guests");
+    const statTotalGen = document.getElementById("stat-total-generates");
+    const searchGuest = document.getElementById("search-guest");
+    const tableBody = document.getElementById("guest-table-body");
+    const dbStatusBadge = document.getElementById("db-status");
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toast-message");
+
+    // Local Storage Configuration
+    const GUEST_STORAGE_KEY = "guest_generation_counts";
+
+    // Load local storage guests
+    const getLocalGuests = () => {
+      try {
+        return JSON.parse(localStorage.getItem(GUEST_STORAGE_KEY) || "{}");
+      } catch (e) {
+        console.error("Failed to parse LocalStorage guest counts:", e);
+        return {};
+      }
+    };
+
+    // Save/Update single guest locally
+    const saveLocalGuest = (panggilan, name) => {
+      const cleanName = name.trim();
+      const docId = `${panggilan.toLowerCase()}_${cleanName.toLowerCase().replace(/\s+/g, "_")}`;
+      const locals = getLocalGuests();
+
+      if (locals[docId]) {
+        locals[docId].count += 1;
+        locals[docId].lastGenerated = new Date().toISOString();
+        locals[docId].panggilan = panggilan;
+      } else {
+        locals[docId] = {
+          name: cleanName,
+          panggilan: panggilan,
+          count: 1,
+          lastGenerated: new Date().toISOString()
+        };
+      }
+      localStorage.setItem(GUEST_STORAGE_KEY, JSON.stringify(locals));
+      return locals[docId];
+    };
+
+    // UI state
+    let firestoreConnected = false;
+    let firestoreGuests = [];
+    let filterQuery = "";
+    let isGenerated = false;
+    let currentGeneratedGuests = [];
+
+    // Get list of guests to display
+    const getDisplayList = () => {
+      if (firestoreConnected) {
+        return firestoreGuests;
+      } else {
+        const locals = getLocalGuests();
+        return Object.values(locals).sort((a, b) => new Date(b.lastGenerated) - new Date(a.lastGenerated));
+      }
+    };
+
+    // Versi Pengantin Template
+    const getPengantinTemplate = (panggilan, name) => {
+      const nameDisplay = name ? name.trim() : "[Nama Tamu]";
+      const urlName = name ? encodeURIComponent(name.trim()).replace(/%20/g, '+') : "Nama+Tamu";
+
+      return `Assalamu'alaikum Warahmatullahi Wabarakatuh
+
+
+Kepada Yang Terhormat,
+${panggilan} ${nameDisplay}
+di tempat
+
+Dengan senantiasa memanjatkan puji syukur ke hadirat Allah Subhanahu wa Ta'ala atas segala limpahan rahmat dan karunia-Nya, serta dengan seizin dan restu dari kedua orang tua kami, perkenankanlah kami dengan segala kerendahan hati menyampaikan undangan ini.
+
+Kami yang berbahagia:
+
+❧Muhammad Thoriq Hadad & Annisa Apriliani❧
+
+Bermaksud mengundang kehadiran ${panggilan} yang kami muliakan pada rangkaian acara pernikahan kami yang akan diselenggarakan pada:
+
+  AKAD NIKAH                            
+  Hari    : Sabtu                            
+  Tanggal : 20 Juni 2026            
+  Pukul   : 08.00 – 10.00 WIB     
+
+
+  RESEPSI PERNIKAHAN         
+  Hari      : Sabtu                           
+  Tanggal   : 20 Juni 2026           
+  Pukul     : - 11.00 – 13.30 WIB
+              - 13:30 - 16:00  WIB    
+
+📍 Tempat:
+Gedung Aula SMKN 26 Jakarta
+Jl. Balai Pustaka Baru I No.2, RT.2/RW.7, Rawamangun, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13220
+
+Undangan Digital:
+https://thoriqapril.space/invitation?to=${urlName}
+
+Lokasi:
+https://maps.app.goo.gl/NAywMBkVcVmb18jT8
+
+Kehadiran serta lantunan doa restu dari ${panggilan} merupakan suatu kehormatan yang sangat berarti dan kebahagiaan yang tak ternilai bagi kami serta kedua keluarga di hari yang sangat istimewa ini.
+
+Atas segala perhatian, kehadiran, serta doa restu yang ${panggilan} limpahkan, kami menghaturkan terima kasih yang sebesar-besarnya dan permohonan maaf apabila terdapat kekurangan dalam penyampaian undangan ini.
+
+Wassalamu'alaikum Warahmatullahi Wabarakatuh
+
+Dengan hormat dan penuh rasa syukur,
+
+Muhammad Thoriq Hadad
+& Annisa Apriliani`;
+    };
+
+    // Versi Orang Tua Template
+    const getOrangTuaTemplate = (panggilan, name) => {
+      const nameDisplay = name ? name.trim() : "[Nama Tamu]";
+      const urlName = name ? encodeURIComponent(name.trim()).replace(/%20/g, '+') : "Nama+Tamu";
+
+      return `Assalamu'alaikum Warahmatullahi Wabarakatuh
+
+Kepada Yth.
+${panggilan} ${nameDisplay}
+di Tempat
+
+Dengan memanjatkan puji syukur ke hadirat Allah Subhanahu wa Ta'ala atas segala rahmat dan karunia-Nya, kami sekeluarga bermaksud mengundang ${panggilan} untuk berkenan hadir dan memberikan doa restu pada acara pernikahan putra-putri kami:
+
+❧ Muhammad Thoriq Hadad
+   Putra dari
+   Bapak H. Mar'ih HM, M.Pd.I & Ibu Amyati
+
+dengan
+
+❧ Annisa Apriliani
+   Putri dari
+   Bapak Herman & Ibu Ros Pandan
+
+Insya Allah akan dilaksanakan pada:
+
+  AKAD NIKAH
+  Hari    : Sabtu
+  Tanggal : 20 Juni 2026
+  Pukul   : 08.00 – 10.00 WIB
+
+  RESEPSI PERNIKAHAN
+  Hari    : Sabtu
+  Tanggal : 20 Juni 2026
+  Pukul   :
+  • 11.00 – 13.30 WIB
+  • 13.30 – 16.00 WIB
+
+📍 Tempat:
+Gedung Aula SMKN 26 Jakarta
+Jl. Balai Pustaka Baru I No.2, RT.2/RW.7, Rawamangun, Kec. Pulo Gadung, Kota Jakarta Timur, DKI Jakarta 13220
+
+Undangan Digital:
+https://thoriqapril.space/invitation?to=${urlName}
+
+Lokasi:
+https://maps.app.goo.gl/NAywMBkVcVmb18jT8
+
+Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila ${panggilan} berkenan hadir untuk memberikan doa restu kepada kedua mempelai.
+
+Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.
+
+Wassalamu'alaikum Warahmatullahi Wabarakatuh
+
+Hormat kami,
+
+Keluarga Besar
+
+Bapak H. Mar'ih HM, M.Pd.I & Ibu Amyati
+
+serta
+
+Bapak Herman & Ibu Ros Pandan`;
+    };
+
+    // Pending Generate UI Reset
+    const setPendingGenerate = () => {
+      isGenerated = false;
+      if (generatedListCard) {
+        generatedListCard.style.display = "none";
+      }
+    };
+
+    titleSelect.addEventListener("change", setPendingGenerate);
+    guestNameInput.addEventListener("input", setPendingGenerate);
+    templateRadios.forEach(r => r.addEventListener("change", setPendingGenerate));
+
+    // Initial load setup
+    setPendingGenerate();
+
+    // Show Toast
+    const showToast = (message) => {
+      toastMessage.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    };
+
+    // Save/Increment guest generate count in Firestore & LocalStorage
+    const logGeneration = async (title, name) => {
+      if (!name) return;
+
+      // Always save locally first
+      saveLocalGuest(title, name);
+
+      // Attempt Firestore write
+      if (db) {
+        const cleanName = name.toLowerCase().replace(/\s+/g, "_");
+        const docId = `${title.toLowerCase()}_${cleanName}`;
+        try {
+          const docRef = doc(db, "guest_counts", docId);
+          await setDoc(docRef, {
+            name: name,
+            panggilan: title,
+            count: increment(1),
+            lastGenerated: serverTimestamp()
+          }, { merge: true });
+        } catch (error) {
+          console.warn("Firestore save failed (permissions/offline). Using LocalStorage cache:", error.message);
+        }
+      }
+    };
+
+    // Render generated guest table
+    const renderGeneratedList = () => {
+      if (!generatedGuestsBody) return;
+
+      generatedCountBadge.textContent = `${currentGeneratedGuests.length} tamu`;
+
+      if (currentGeneratedGuests.length === 0) {
+        generatedGuestsBody.innerHTML = `
+          <tr>
+            <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 20px;">
+              Belum ada tamu yang di-generate.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let rowsHtml = "";
+      currentGeneratedGuests.forEach((guest, index) => {
+        rowsHtml += `
+          <tr>
+            <td style="text-align: center; color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">${index + 1}</td>
+            <td>
+              <div style="font-weight: 600; color: var(--primary-dark); font-size: 0.9rem;">${esc(guest.name)}</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.5px;">${esc(guest.title)}</div>
+            </td>
+            <td>
+              <div class="guest-action-group">
+                <button class="btn-row-action btn-row-text" onclick="copyText(${index})">
+                  <i class="fas fa-copy"></i> Copy
+                </button>
+                <button class="btn-row-action btn-row-wa" onclick="sendWa(${index})">
+                  <i class="fab fa-whatsapp"></i> Kirim
+                </button>
+                <button class="btn-row-action btn-row-link" onclick="copyLink(${index})">
+                  <i class="fas fa-link"></i> Link
+                </button>
+                <button class="btn-row-action btn-row-delete" onclick="deleteGeneratedGuest(${index})">
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      generatedGuestsBody.innerHTML = rowsHtml;
+    };
+
+    // Global action helpers (exposed to window object since script is type="module")
+    window.sendWa = (idx) => {
+      const guest = currentGeneratedGuests[idx];
+      if (!guest) return;
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(guest.text)}`;
+      window.open(waUrl, "_blank");
+      showToast(`Membuka WhatsApp untuk ${guest.name}...`);
+    };
+
+    window.sendFb = (idx) => {
+      const guest = currentGeneratedGuests[idx];
+      if (!guest) return;
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(guest.link)}`;
+      window.open(shareUrl, "_blank");
+      showToast(`Membuka Facebook untuk ${guest.name}...`);
+    };
+
+    window.copyLink = async (idx) => {
+      const guest = currentGeneratedGuests[idx];
+      if (!guest) return;
+      try {
+        await navigator.clipboard.writeText(guest.link);
+        showToast(`Link undangan untuk ${guest.name} berhasil disalin!`);
+      } catch (err) {
+        console.error(err);
+        showToast("Gagal menyalin link.");
+      }
+    };
+
+    window.copyText = async (idx) => {
+      const guest = currentGeneratedGuests[idx];
+      if (!guest) return;
+      try {
+        await navigator.clipboard.writeText(guest.text);
+        showToast(`Teks undangan untuk ${guest.name} berhasil disalin!`);
+      } catch (err) {
+        console.error(err);
+        showToast("Gagal menyalin teks.");
+      }
+    };
+
+    window.deleteGeneratedGuest = (idx) => {
+      currentGeneratedGuests.splice(idx, 1);
+      renderGeneratedList();
+      if (currentGeneratedGuests.length === 0) {
+        generatedListCard.style.display = "none";
+      }
+    };
+
+    // Generate Button Action
+    btnGenerate.addEventListener("click", async () => {
+      const rawInput = guestNameInput.value.trim();
+      if (!rawInput) {
+        alert("Harap masukkan nama tamu undangan terlebih dahulu!");
+        guestNameInput.focus();
+        return;
+      }
+
+      // Split by newlines and filter empty lines
+      const names = rawInput.split("\n").map(n => n.trim()).filter(n => n.length > 0);
+      if (names.length === 0) {
+        alert("Harap masukkan minimal satu nama tamu undangan!");
+        guestNameInput.focus();
+        return;
+      }
+
+      const title = titleSelect.value;
+      const templateType = getTemplateType();
+      currentGeneratedGuests = [];
+
+      // Generate for all names and log them
+      for (const name of names) {
+        let text = "";
+        if (templateType === "pengantin") {
+          text = getPengantinTemplate(title, name);
+        } else {
+          text = getOrangTuaTemplate(title, name);
+        }
+
+        const urlName = encodeURIComponent(name).replace(/%20/g, '+');
+        const link = `https://thoriqapril.space/invitation?to=${urlName}`;
+
+        currentGeneratedGuests.push({
+          name: name,
+          title: title,
+          text: text,
+          link: link
+        });
+
+        // 2. Increment database count
+        await logGeneration(title, name);
+      }
+
+      isGenerated = true;
+      
+      // Show list card and render
+      if (generatedListCard) {
+        generatedListCard.style.display = "block";
+      }
+      renderGeneratedList();
+
+      // Re-render dashboard table if using local storage
+      if (!firestoreConnected) {
+        renderTable();
+      }
+
+      showToast(`${names.length} undangan berhasil di-generate!`);
+    });
+
+    // Format Date Utility
+    const formatDateTime = (timestamp) => {
+      if (!timestamp) return "—";
+
+      let date;
+      if (timestamp.toDate) {
+        date = timestamp.toDate();
+      } else {
+        date = new Date(timestamp);
+      }
+
+      if (isNaN(date.getTime())) return "—";
+
+      return date.toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }) + " WIB";
+    };
+
+    // Escape HTML Helper
+    const esc = (str) => {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+
+    // Render guest list table
+    const renderTable = () => {
+      if (!tableBody) return;
+
+      const currentList = getDisplayList();
+
+      const filteredList = currentList.filter(item => {
+        const queryClean = filterQuery.toLowerCase().trim();
+        return !queryClean || item.name.toLowerCase().includes(queryClean) || item.panggilan.toLowerCase().includes(queryClean);
+      });
+
+      // Update Statistics Widgets
+      const uniqueCount = currentList.length;
+      const totalCount = currentList.reduce((acc, curr) => acc + (curr.count || 0), 0);
+
+      statUnique.textContent = uniqueCount;
+      statTotalGen.textContent = totalCount;
+
+      if (filteredList.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state">
+              <i class="fas fa-folder-open"></i>
+              ${filterQuery ? "Tidak ditemukan nama tamu yang cocok." : "Belum ada tamu yang digenerate."}
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let rowsHtml = "";
+      filteredList.forEach((item, index) => {
+        rowsHtml += `
+          <tr>
+            <td style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">${index + 1}</td>
+            <td>${esc(item.panggilan)}</td>
+            <td class="td-name">${esc(item.name)}</td>
+            <td style="text-align: center;"><span class="badge-count">${item.count || 1}x</span></td>
+            <td class="td-date">${formatDateTime(item.lastGenerated)}</td>
+          </tr>
+        `;
+      });
+      tableBody.innerHTML = rowsHtml;
+    };
+
+    // Live Database sync
+    if (db) {
+      const q = query(collection(db, "guest_counts"), orderBy("lastGenerated", "desc"));
+      onSnapshot(q, (snapshot) => {
+        firestoreConnected = true;
+        firestoreGuests = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        // Switch badge to cloud sync success
+        dbStatusBadge.className = "db-status-badge db-status-cloud";
+        dbStatusBadge.innerHTML = '<i class="fas fa-cloud"></i> Database Cloud (Firestore)';
+
+        renderTable();
+      }, (error) => {
+        console.warn("Firestore subscription denied or failed. Operating in LocalStorage mode:", error.message);
+        firestoreConnected = false;
+
+        // Update badge to local storage fallback
+        dbStatusBadge.className = "db-status-badge db-status-local";
+        dbStatusBadge.innerHTML = '<i class="fas fa-database"></i> Database Lokal';
+
+        renderTable();
+      });
+    } else {
+      firestoreConnected = false;
+      renderTable();
+    }
+
+    // Search input handler
+    searchGuest.addEventListener("input", (e) => {
+      filterQuery = e.target.value;
+      renderTable();
+    });
+  </script>
+
+  <!-- PIN Gate Logic (non-module so it runs immediately) -->
+  <script>
+    (() => {
+      const CORRECT_PIN = '2026';
+      const SESSION_KEY = 'db_pin_unlocked';
+      const pinGate = document.getElementById('db-pin-gate');
+      const dashboardContent = document.getElementById('db-dashboard-content');
+      const pinError = document.getElementById('pin-error-msg');
+      const pinDigits = [
+        document.getElementById('pin-1'),
+        document.getElementById('pin-2'),
+        document.getElementById('pin-3'),
+        document.getElementById('pin-4')
+      ];
+
+      // Check if already unlocked this session
+      if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        unlockDashboard();
+      }
+
+      function unlockDashboard() {
+        pinGate.style.display = 'none';
+        dashboardContent.style.display = 'block';
+        sessionStorage.setItem(SESSION_KEY, '1');
+      }
+
+      function getPin() {
+        return pinDigits.map(d => d.value).join('');
+      }
+
+      function checkPin() {
+        const pin = getPin();
+        if (pin.length < 4) return;
+
+        if (pin === CORRECT_PIN) {
+          pinDigits.forEach(d => {
+            d.classList.remove('error');
+            d.classList.add('success');
+            d.disabled = true;
+          });
+          pinError.textContent = '';
+          setTimeout(unlockDashboard, 400);
+        } else {
+          pinDigits.forEach(d => {
+            d.classList.add('error');
+          });
+          pinError.textContent = 'PIN salah. Silakan coba lagi.';
+          setTimeout(() => {
+            pinDigits.forEach(d => {
+              d.value = '';
+              d.classList.remove('error');
+            });
+            pinDigits[0].focus();
+            pinError.textContent = '';
+          }, 1000);
+        }
+      }
+
+      pinDigits.forEach((input, idx) => {
+        // Only allow single digit
+        input.addEventListener('input', (e) => {
+          // Keep only last character typed
+          const val = e.target.value;
+          if (val.length > 1) {
+            e.target.value = val.slice(-1);
+          }
+
+          // Auto-advance to next field
+          if (e.target.value && idx < 3) {
+            pinDigits[idx + 1].focus();
+          }
+
+          // Check if all 4 digits are filled
+          if (getPin().length === 4) {
+            setTimeout(checkPin, 150);
+          }
+        });
+
+        // Handle backspace to go to previous field
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+            pinDigits[idx - 1].focus();
+            pinDigits[idx - 1].value = '';
+          }
+        });
+
+        // Select all text on focus for easy overwrite
+        input.addEventListener('focus', () => {
+          input.select();
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
