@@ -484,36 +484,108 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 6. Wishes Form Submission
+    // 6. Wishes Form — Firebase Firestore (real-time, shared across all users)
     const wishesForm = document.getElementById('wishes-form');
     const wishesList = document.getElementById('wishes-list');
 
-    if (wishesForm) {
-        wishesForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    function renderWish(entry, prepend = false) {
+        let badgeClass = 'badge-hadir';
+        if (entry.attendance === 'Tidak Hadir') badgeClass = 'badge-tidak-hadir';
+        if (entry.attendance === 'Masih Ragu')  badgeClass = 'badge-ragu';
 
-            const name = document.getElementById('wish-name').value;
-            const text = document.getElementById('wish-text').value;
-            const attendance = document.getElementById('wish-attendance').value;
+        const newWish = document.createElement('div');
+        newWish.classList.add('wish-item');
+        const dateStr = entry.timestamp
+            ? `<span class="wish-date">${new Date(entry.timestamp).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })}</span>`
+            : '';
+        newWish.innerHTML = `
+            <strong>${entry.name}</strong> <span class="badge ${badgeClass}">${entry.attendance}</span>${dateStr}
+            <p>${entry.text}</p>
+        `;
 
-            let badgeClass = 'badge-hadir';
-            if (attendance === 'Tidak Hadir') badgeClass = 'badge-tidak-hadir';
-            if (attendance === 'Masih Ragu') badgeClass = 'badge-ragu';
-
-            const newWish = document.createElement('div');
-            newWish.classList.add('wish-item');
-            newWish.innerHTML = `
-                <strong>${name}</strong> <span class="badge ${badgeClass}">${attendance}</span>
-                <p>${text}</p>
-            `;
-
-            // Add to top of list
+        if (prepend && wishesList && wishesList.firstChild) {
             wishesList.insertBefore(newWish, wishesList.firstChild);
-
-            // Reset form
-            wishesForm.reset();
-        });
+        } else if (wishesList) {
+            wishesList.appendChild(newWish);
+        }
     }
+
+    // Helper: render seluruh list sekaligus (dari Firestore snapshot)
+    function renderAllWishes(entries) {
+        if (!wishesList) return;
+        wishesList.innerHTML = '';
+        if (entries.length === 0) {
+            wishesList.innerHTML = '<p style="text-align:center;opacity:.5;font-size:.85rem;padding:20px 0">Belum ada ucapan. Jadilah yang pertama! 💌</p>';
+            return;
+        }
+        entries.forEach(e => renderWish(e, false));
+    }
+
+    // ── Setup Firebase atau fallback localStorage ──────────────────────
+    function setupWithFirebase(firebase) {
+        // Real-time listener: semua orang lihat data yang sama
+        firebase.subscribeWishes(renderAllWishes);
+
+        if (wishesForm) {
+            wishesForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = wishesForm.querySelector('button[type="submit"]');
+                const originalText = btn ? btn.innerHTML : '';
+                if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Mengirim...'; }
+
+                const entry = {
+                    name:       document.getElementById('wish-name').value.trim(),
+                    text:       document.getElementById('wish-text').value.trim(),
+                    attendance: document.getElementById('wish-attendance').value,
+                };
+
+                try {
+                    await firebase.addWish(entry);
+                    wishesForm.reset();
+                } catch (err) {
+                    console.error('Firestore error:', err);
+                    alert('Gagal mengirim. Coba lagi.');
+                } finally {
+                    if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
+                }
+            });
+        }
+    }
+
+    function setupWithLocalStorage() {
+        const STORAGE_KEY = 'wedding_wishes';
+        const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        renderAllWishes([...stored].reverse());
+
+        if (wishesForm) {
+            wishesForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const entry = {
+                    name:       document.getElementById('wish-name').value.trim(),
+                    text:       document.getElementById('wish-text').value.trim(),
+                    attendance: document.getElementById('wish-attendance').value,
+                    timestamp:  new Date().toISOString()
+                };
+                const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                all.push(entry);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+                renderWish(entry, true);
+                wishesForm.reset();
+            });
+        }
+    }
+
+    // Tunggu firebase-init.js selesai load
+    if (window.__firebase) {
+        setupWithFirebase(window.__firebase);
+    } else {
+        window.addEventListener('firebase-ready', () => setupWithFirebase(window.__firebase), { once: true });
+        // Timeout 3 detik: jika Firebase belum siap (config belum diisi), pakai localStorage
+        setTimeout(() => {
+            if (!window.__firebase) setupWithLocalStorage();
+        }, 3000);
+    }
+
 
     // 7. Particle Generator
     const particlesContainer = document.getElementById('particles');
@@ -591,9 +663,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Copy Rekening Function (Global)
 function copyRekening(elementId) {
-    const text = document.getElementById(elementId).innerText;
+    const text = document.getElementById(elementId).innerText.trim();
     navigator.clipboard.writeText(text).then(() => {
-        alert("Nomor rekening berhasil disalin: " + text);
+        // Find the closest btn-copy-inline button from the element
+        const el = document.getElementById(elementId);
+        const btn = el ? el.parentElement.querySelector('.btn-copy-inline') : null;
+
+        if (btn) {
+            const originalHTML = btn.innerHTML;
+            // Swap to checkmark SVG
+            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });

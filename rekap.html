@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rekap Ucapan & RSVP — Thoriq & Apriliani</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f5f2;
+      --surface:   #ffffff;
+      --border:    rgba(0,0,0,0.08);
+      --text:      #1a1714;
+      --muted:     #7a7470;
+      --accent:    #a3896a;
+      --hadir:     #16a34a;
+      --tidak:     #dc2626;
+      --ragu:      #d97706;
+      --font-head: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --radius:    16px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font-body);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 32px 16px 64px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-header .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .page-header h1 em { font-style: italic; color: var(--accent); }
+
+    /* Live badge */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--hadir);
+      border: 1px solid rgba(22,163,74,0.3);
+      background: rgba(22,163,74,0.07);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-top: 12px;
+    }
+
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--hadir);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover { transform: translateY(-2px); }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stat-card.hadir  .stat-num { color: var(--hadir); }
+    .stat-card.tidak  .stat-num { color: var(--tidak); }
+    .stat-card.ragu   .stat-num { color: var(--ragu); }
+    .stat-card.total  .stat-num { color: var(--accent); }
+
+    /* Toolbar */
+    .toolbar {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover  { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .action-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .btn-action {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover { background: var(--text); color: #fff; border-color: var(--text); }
+    .btn-action.danger:hover { background: var(--tidak); border-color: var(--tidak); color: #fff; }
+
+    /* Search */
+    .search-wrap {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 12px 16px 12px 46px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(163,137,106,0.12);
+    }
+
+    /* Table */
+    .entries-wrap { max-width: 900px; margin: 0 auto; }
+
+    .entry-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-align: right;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    thead tr { background: #f0ede9; }
+
+    th {
+      font-size: 0.68rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #faf9f7; }
+
+    td {
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      vertical-align: top;
+    }
+
+    td.td-name { font-weight: 600; }
+    td.td-msg  { color: var(--muted); max-width: 340px; }
+    td.td-date { white-space: nowrap; color: var(--muted); font-size: 0.78rem; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge-hadir       { background: #dcfce7; color: var(--hadir); }
+    .badge-tidak-hadir { background: #fee2e2; color: var(--tidak); }
+    .badge-ragu        { background: #fef3c7; color: var(--ragu); }
+
+    /* Loading / Empty */
+    .center-msg {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .center-msg svg { display: block; margin: 0 auto 16px; opacity: 0.3; }
+
+    /* Firebase status */
+    #fb-status {
+      max-width: 900px;
+      margin: 0 auto 16px;
+      font-size: 0.78rem;
+      padding: 10px 16px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    #fb-status.error {
+      display: block;
+      background: #fee2e2;
+      color: var(--tidak);
+      border: 1px solid rgba(220,38,38,0.2);
+    }
+
+    /* Page footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .page-footer a { color: var(--accent); text-decoration: none; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar, .search-wrap, .btn-action, .live-badge, #fb-status { display: none !important; }
+      table { box-shadow: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="page-header">
+    <p class="eyebrow">Dashboard Rekap</p>
+    <h1>Ucapan & RSVP<br><em>Thoriq & Apriliani</em></h1>
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      Live · Memperbarui otomatis
+    </div>
+  </header>
+
+  <!-- Summary Stats -->
+  <div class="summary-grid">
+    <div class="stat-card total">
+      <div class="stat-num" id="stat-total">—</div>
+      <div class="stat-label">Total Respons</div>
+    </div>
+    <div class="stat-card hadir">
+      <div class="stat-num" id="stat-hadir">—</div>
+      <div class="stat-label">Hadir</div>
+    </div>
+    <div class="stat-card tidak">
+      <div class="stat-num" id="stat-tidak">—</div>
+      <div class="stat-label">Tidak Hadir</div>
+    </div>
+    <div class="stat-card ragu">
+      <div class="stat-num" id="stat-ragu">—</div>
+      <div class="stat-label">Masih Ragu</div>
+    </div>
+  </div>
+
+  <!-- Firebase error banner -->
+  <div id="fb-status"></div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="semua">Semua</button>
+      <button class="filter-btn" data-filter="Hadir">✓ Hadir</button>
+      <button class="filter-btn" data-filter="Tidak Hadir">✗ Tidak Hadir</button>
+      <button class="filter-btn" data-filter="Masih Ragu">? Masih Ragu</button>
+    </div>
+    <div class="action-group">
+      <button class="btn-action" id="btn-export">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+      <button class="btn-action" id="btn-print">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print
+      </button>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" placeholder="Cari nama atau ucapan…" />
+  </div>
+
+  <!-- Entries -->
+  <div class="entries-wrap">
+    <p class="entry-count" id="entry-count"></p>
+    <div id="table-container">
+      <div class="center-msg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+        Menghubungkan ke Firestore…
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p>Data tersimpan di Firebase Firestore · <a href="index.html">← Kembali ke Undangan</a></p>
+  </footer>
+
+  <script type="module">
+    import { initializeApp }          from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection,
+             query, orderBy,
+             onSnapshot }             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // ── Paste firebaseConfig yang sama seperti di firebase-init.js ───────
+    const firebaseConfig = {
+      apiKey:            "PASTE_API_KEY_ANDA",
+      authDomain:        "PASTE_AUTH_DOMAIN_ANDA",
+      projectId:         "PASTE_PROJECT_ID_ANDA",
+      storageBucket:     "PASTE_STORAGE_BUCKET_ANDA",
+      messagingSenderId: "PASTE_MESSAGING_SENDER_ID_ANDA",
+      appId:             "PASTE_APP_ID_ANDA"
+    };
+    // ─────────────────────────────────────────────────────────────────────
+
+    let allData = [];
+    let activeFilter = 'semua';
+    let searchQuery  = '';
+
+    // ── Init Firebase ────────────────────────────────────────────────────
+    let app, db;
+    try {
+      app = initializeApp(firebaseConfig);
+      db  = getFirestore(app);
+    } catch (err) {
+      showError('Gagal menginisialisasi Firebase. Pastikan firebaseConfig sudah diisi dengan benar.');
+      console.error(err);
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('fb-status');
+      el.textContent = '⚠️ ' + msg;
+      el.classList.add('error');
+    }
+
+    // ── Real-time listener ───────────────────────────────────────────────
+    if (db) {
+      const q = query(collection(db, 'wishes'), orderBy('timestamp', 'desc'));
+      onSnapshot(q,
+        (snapshot) => {
+          allData = snapshot.docs.map(doc => ({
+            id:         doc.id,
+            name:       doc.data().name      || '',
+            text:       doc.data().text      || '',
+            attendance: doc.data().attendance || '',
+            timestamp:  doc.data().timestamp?.toDate?.()?.toISOString() || null
+          }));
+          updateStats();
+          render();
+        },
+        (err) => {
+          console.error('Firestore error:', err);
+          showError('Tidak dapat membaca data: ' + err.message);
+        }
+      );
+    }
+
+    // ── Stats ────────────────────────────────────────────────────────────
+    function updateStats() {
+      document.getElementById('stat-total').textContent = allData.length;
+      document.getElementById('stat-hadir').textContent = allData.filter(e => e.attendance === 'Hadir').length;
+      document.getElementById('stat-tidak').textContent = allData.filter(e => e.attendance === 'Tidak Hadir').length;
+      document.getElementById('stat-ragu').textContent  = allData.filter(e => e.attendance === 'Masih Ragu').length;
+    }
+
+    // ── Filter & Search ──────────────────────────────────────────────────
+    function filtered() {
+      return allData.filter(e => {
+        const matchFilter = activeFilter === 'semua' || e.attendance === activeFilter;
+        const q = searchQuery.toLowerCase();
+        const matchSearch = !q
+          || e.name.toLowerCase().includes(q)
+          || e.text.toLowerCase().includes(q);
+        return matchFilter && matchSearch;
+      });
+    }
+
+    // ── Render Table ─────────────────────────────────────────────────────
+    function badgeHTML(att) {
+      const map = { 'Hadir':'badge-hadir', 'Tidak Hadir':'badge-tidak-hadir', 'Masih Ragu':'badge-ragu' };
+      return `<span class="badge ${map[att] || ''}">${att}</span>`;
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      return new Date(iso).toLocaleDateString('id-ID', {
+        day:'numeric', month:'short', year:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      });
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function render() {
+      const data = filtered();
+      const container = document.getElementById('table-container');
+      document.getElementById('entry-count').textContent =
+        data.length === 0 ? '' : `Menampilkan ${data.length} dari ${allData.length} respons`;
+
+      if (data.length === 0) {
+        container.innerHTML = `
+          <div class="center-msg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p>Belum ada respons yang masuk.</p>
+          </div>`;
+        return;
+      }
+
+      const rows = data.map((e, i) => `
+        <tr>
+          <td class="td-name">${escHtml(e.name)}</td>
+          <td>${badgeHTML(e.attendance)}</td>
+          <td class="td-msg">${escHtml(e.text)}</td>
+          <td class="td-date">${fmtDate(e.timestamp)}</td>
+        </tr>`).join('');
+
+      container.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Kehadiran</th>
+              <th>Ucapan / Pesan</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+    }
+
+    // ── Filter Buttons ───────────────────────────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    // ── Search ───────────────────────────────────────────────────────────
+    document.getElementById('search-input').addEventListener('input', e => {
+      searchQuery = e.target.value;
+      render();
+    });
+
+    // ── Export CSV ───────────────────────────────────────────────────────
+    document.getElementById('btn-export').addEventListener('click', () => {
+      const data = filtered();
+      if (!data.length) { alert('Tidak ada data.'); return; }
+
+      const header = ['No','Nama','Kehadiran','Ucapan','Waktu'];
+      const rows   = data.map((e, i) => [
+        i + 1,
+        `"${e.name.replace(/"/g,'""')}"`,
+        `"${e.attendance}"`,
+        `"${e.text.replace(/"/g,'""')}"`,
+        `"${fmtDate(e.timestamp)}"`
+      ].join(','));
+
+      const csv  = [header.join(','), ...rows].join('\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = `rekap-thoriq-april-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // ── Print ─────────────────────────────────────────────────────────────
+    document.getElementById('btn-print').addEventListener('click', () => window.print());
+  </script>
+
+</body>
+</html>

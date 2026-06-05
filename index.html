@@ -12,7 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thoriqapril.space/">
   <meta property="og:title" content="Thoriq & April Wedding">
-  <meta property="og:description" content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - Sabtu, 20 Juni 2026. Buka undangan untuk melihat detail acara.">
+  <meta property="og:description"
+    content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - Sabtu, 20 Juni 2026. Buka undangan untuk melihat detail acara.">
   <meta property="og:image" content="https://thoriqapril.space/thumbnail.jpg">
   <meta property="og:image:width" content="500">
   <meta property="og:image:height" content="500">
@@ -21,7 +22,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thoriq & April Wedding">
-  <meta name="twitter:description" content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - Sabtu, 20 Juni 2026. Buka undangan untuk melihat detail acara.">
+  <meta name="twitter:description"
+    content="Undangan pernikahan Muhammad Thoriq Hadad & Annisa Apriliani - Sabtu, 20 Juni 2026. Buka undangan untuk melihat detail acara.">
   <meta name="twitter:image" content="https://thoriqapril.space/thumbnail.jpg">
 
   <link rel="icon" type="image/webp" href="Foto Background/logo.webp">
@@ -293,19 +295,78 @@
           terindah bagi kami. Jika ingin memberi, silakan gunakan cashless atau amplop digital dengan penuh keberkahan.
         </p>
 
-        <div class="bank-card" data-aos="flip-up" data-aos-duration="1000">
-          <h4>Mandiri</h4>
-          <p class="account-number" id="rek-mandiri">60010657116</p>
-          <p class="account-name">a.n Muhammad Thoriq Hadad</p>
-          <button class="btn-copy" onclick="copyRekening('rek-mandiri')"><i class="far fa-copy"></i> Salin
-            Rekening</button>
-        </div>
+        <div class="bank-cards-container">
+          <!-- Card Mandiri -->
+          <div class="bank-card mandiri-card" data-aos="flip-up" data-aos-duration="1000">
+            <div class="card-inner">
+              <div class="card-header">
+                <img src="Logos/mandiri.svg" alt="Mandiri Logo" class="bank-logo mandiri-logo">
+                <span class="card-type">debit</span>
+              </div>
+              <div class="card-chip-container">
+                <div class="card-chip"></div>
+                <svg class="contactless-icon" viewBox="0 0 24 24" width="20" height="20">
+                  <path fill="currentColor"
+                    d="M11.5,12A1.5,1.5 0 0,0 10,13.5A1.5,1.5 0 0,0 11.5,15A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 11.5,12M16,12A6,6 0 0,0 10,6A6,6 0 0,0 4,12A6,6 0 0,0 10,18A6,6 0 0,0 16,12M18,12A8,8 0 0,0 10,4A8,8 0 0,0 2,12A8,8 0 0,0 10,20A8,8 0 0,0 18,12Z" />
+                </svg>
+              </div>
+              <div class="card-number-container">
+                <span id="rek-mandiri" class="account-number">60010657116</span>
+                <button class="btn-copy-inline" onclick="copyRekening('rek-mandiri')" title="Salin Rekening">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-details">
+                <div class="card-holder">
+                  <span class="label">CARDHOLDER</span>
+                  <p class="account-name">MUHAMMAD THORIQ HADAD</p>
+                </div>
+                <div class="card-expiry">
+                  <span class="label">VALID THRU</span>
+                  <p class="expiry-date">99/99</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="bank-card mt-3" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
-          <h4>BCA</h4>
-          <p class="account-number" id="rek-bca">7635605227</p>
-          <p class="account-name">a.n Annisa Apriliani</p>
-          <button class="btn-copy" onclick="copyRekening('rek-bca')"><i class="far fa-copy"></i> Salin Rekening</button>
+          <!-- Card BCA -->
+          <div class="bank-card bca-card" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
+            <div class="card-inner">
+              <div class="card-header">
+                <img src="Logos/bca.svg" alt="BCA Logo" class="bank-logo bca-logo">
+                <span class="card-type">debit</span>
+              </div>
+              <div class="card-chip-container">
+                <div class="card-chip"></div>
+                <svg class="contactless-icon" viewBox="0 0 24 24" width="20" height="20">
+                  <path fill="currentColor"
+                    d="M11.5,12A1.5,1.5 0 0,0 10,13.5A1.5,1.5 0 0,0 11.5,15A1.5,1.5 0 0,0 13,13.5A1.5,1.5 0 0,0 11.5,12M16,12A6,6 0 0,0 10,6A6,6 0 0,0 4,12A6,6 0 0,0 10,18A6,6 0 0,0 16,12M18,12A8,8 0 0,0 10,4A8,8 0 0,0 2,12A8,8 0 0,0 10,20A8,8 0 0,0 18,12Z" />
+                </svg>
+              </div>
+              <div class="card-number-container">
+                <span id="rek-bca" class="account-number">7635605227</span>
+                <button class="btn-copy-inline" onclick="copyRekening('rek-bca')" title="Salin Rekening">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-details">
+                <div class="card-holder">
+                  <span class="label">CARDHOLDER</span>
+                  <p class="account-name">ANNISA APRILIANI</p>
+                </div>
+                <div class="card-expiry">
+                  <span class="label">VALID THRU</span>
+                  <p class="expiry-date">99/99</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -363,6 +424,9 @@
       <img class="lightbox-content" id="lightbox-img" alt="Enlarged Gallery Image">
     </div>
   </div>
+
+  <!-- Firebase SDK (Modular v10 via CDN) -->
+  <script type="module" src="firebase-init.js"></script>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="script.js"></script>
