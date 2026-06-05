@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin — Thoriq & Apriliani</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f7f5f2; --surface: #fff; --border: rgba(0,0,0,0.08);
+      --text: #1a1714; --muted: #7a7470; --accent: #a3896a;
+      --hadir: #16a34a; --tidak: #dc2626; --ragu: #d97706;
+      --font-head: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --radius: 16px; --shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    body { background: var(--bg); font-family: var(--font-body); color: var(--text); min-height: 100vh; }
+
+    /* ── PIN SCREEN ── */
+    #pin-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #1a1714 0%, #2d2420 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pin-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px 36px;
+      width: 100%; max-width: 340px;
+      text-align: center;
+      backdrop-filter: blur(16px);
+    }
+    .pin-logo {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .pin-logo em { color: var(--accent); font-style: italic; }
+    .pin-sub {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+    }
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .pin-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+    .pin-dot.error  { background: var(--tidak);  border-color: var(--tidak); }
+    .pin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .pin-btn {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .pin-btn:hover   { background: rgba(255,255,255,0.16); }
+    .pin-btn:active  { transform: scale(0.94); }
+    .pin-btn.del     { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+    .pin-btn.del:hover { color: #fff; }
+    .pin-err {
+      font-size: 0.75rem;
+      color: var(--tidak);
+      height: 18px;
+      transition: opacity 0.3s;
+    }
+
+    /* ── MAIN CONTENT (hidden until unlocked) ── */
+    #main { display: none; padding: 32px 16px 64px; }
+
+    .page-header { text-align: center; margin-bottom: 40px; }
+    .page-header .eyebrow { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .page-header h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; line-height: 1.2; }
+    .page-header h1 em { font-style: italic; color: var(--accent); }
+    .live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--hadir); border: 1px solid rgba(22,163,74,0.3); background: rgba(22,163,74,0.07); border-radius: 20px; padding: 4px 12px; margin-top: 12px; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hadir); animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto 40px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; box-shadow: var(--shadow); }
+    .stat-num { font-family: var(--font-head); font-size: 2.8rem; font-weight: 600; line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .stat-card.hadir .stat-num { color: var(--hadir); }
+    .stat-card.tidak .stat-num { color: var(--tidak); }
+    .stat-card.ragu  .stat-num { color: var(--ragu); }
+    .stat-card.total .stat-num { color: var(--accent); }
+
+    .toolbar { max-width: 900px; margin: 0 auto 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { font-size: 0.75rem; font-weight: 500; padding: 7px 16px; border-radius: 30px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); cursor: pointer; transition: all .2s; }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .action-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-action { font-size: 0.75rem; font-weight: 500; padding: 7px 16px; border-radius: 30px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all .2s; }
+    .btn-action:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+    .search-wrap { max-width: 900px; margin: 0 auto 20px; position: relative; }
+    .search-wrap svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    #search-input { width: 100%; padding: 12px 16px 12px 46px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: .9rem; background: var(--surface); color: var(--text); outline: none; transition: border-color .2s, box-shadow .2s; }
+    #search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(163,137,106,.12); }
+
+    .entries-wrap { max-width: 900px; margin: 0 auto; }
+    .entry-count { font-size: .78rem; color: var(--muted); margin-bottom: 12px; text-align: right; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    thead tr { background: #f0ede9; }
+    th { font-size: .68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #faf9f7; }
+    td { padding: 14px 18px; font-size: .88rem; vertical-align: top; }
+    td.td-name { font-weight: 600; }
+    td.td-msg { color: var(--muted); max-width: 340px; }
+    td.td-date { white-space: nowrap; color: var(--muted); font-size: .78rem; }
+    .badge { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .5px; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .badge-hadir       { background: #dcfce7; color: var(--hadir); }
+    .badge-tidak-hadir { background: #fee2e2; color: var(--tidak); }
+    .badge-ragu        { background: #fef3c7; color: var(--ragu); }
+    .center-msg { text-align: center; padding: 64px 24px; color: var(--muted); font-size: .9rem; }
+    .center-msg svg { display: block; margin: 0 auto 16px; opacity: .3; }
+    #fb-status { max-width: 900px; margin: 0 auto 16px; font-size: .78rem; padding: 10px 16px; border-radius: 10px; display: none; }
+    #fb-status.error { display: block; background: #fee2e2; color: var(--tidak); border: 1px solid rgba(220,38,38,.2); }
+    .page-footer { text-align: center; margin-top: 48px; font-size: .75rem; color: var(--muted); }
+    .page-footer a { color: var(--accent); text-decoration: none; }
+    @media print { body{background:#fff;padding:0} .toolbar,.search-wrap,.btn-action,.live-badge,#fb-status{display:none!important} table{box-shadow:none} }
+  </style>
+</head>
+<body>
+
+<!-- ── PIN SCREEN ── -->
+<div id="pin-screen">
+  <div class="pin-card">
+    <div class="pin-logo">Thoriq <em>&</em> April</div>
+    <div class="pin-sub">Admin Panel · Masukkan PIN</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-btn" onclick="pinPress('1')">1</button>
+      <button class="pin-btn" onclick="pinPress('2')">2</button>
+      <button class="pin-btn" onclick="pinPress('3')">3</button>
+      <button class="pin-btn" onclick="pinPress('4')">4</button>
+      <button class="pin-btn" onclick="pinPress('5')">5</button>
+      <button class="pin-btn" onclick="pinPress('6')">6</button>
+      <button class="pin-btn" onclick="pinPress('7')">7</button>
+      <button class="pin-btn" onclick="pinPress('8')">8</button>
+      <button class="pin-btn" onclick="pinPress('9')">9</button>
+      <button class="pin-btn" style="visibility:hidden"></button>
+      <button class="pin-btn" onclick="pinPress('0')">0</button>
+      <button class="pin-btn del" onclick="pinDel()">⌫</button>
+    </div>
+    <div class="pin-err" id="pin-err"></div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div id="main">
+  <header class="page-header">
+    <p class="eyebrow">Dashboard Rekap</p>
+    <h1>Ucapan & RSVP<br><em>Thoriq & Apriliani</em></h1>
+    <div class="live-badge"><span class="live-dot"></span>Live · Memperbarui otomatis</div>
+  </header>
+
+  <div class="summary-grid">
+    <div class="stat-card total"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Respons</div></div>
+    <div class="stat-card hadir"><div class="stat-num" id="stat-hadir">—</div><div class="stat-label">Hadir</div></div>
+    <div class="stat-card tidak"><div class="stat-num" id="stat-tidak">—</div><div class="stat-label">Tidak Hadir</div></div>
+    <div class="stat-card ragu"><div class="stat-num" id="stat-ragu">—</div><div class="stat-label">Masih Ragu</div></div>
+  </div>
+
+  <div id="fb-status"></div>
+
+  <div class="toolbar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="semua">Semua</button>
+      <button class="filter-btn" data-filter="Hadir">✓ Hadir</button>
+      <button class="filter-btn" data-filter="Tidak Hadir">✗ Tidak Hadir</button>
+      <button class="filter-btn" data-filter="Masih Ragu">? Masih Ragu</button>
+    </div>
+    <div class="action-group">
+      <button class="btn-action" id="btn-export">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+      <button class="btn-action" id="btn-print">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print
+      </button>
+      <button class="btn-action" id="btn-logout" style="color:#dc2626">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Keluar
+      </button>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" placeholder="Cari nama atau ucapan…" />
+  </div>
+
+  <div class="entries-wrap">
+    <p class="entry-count" id="entry-count"></p>
+    <div id="table-container">
+      <div class="center-msg">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+        Menghubungkan ke Firestore…
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p><a href="../index.html">← Kembali ke Undangan</a></p>
+  </footer>
+</div>
+
+<script>
+  // ── PIN LOGIC ────────────────────────────────────────────────────────
+  // Ganti PIN di sini (4 digit)
+  const CORRECT_PIN = '2006';
+  const SESSION_KEY = 'panel_auth_ta2026';
+
+  let pinInput = '';
+
+  function pinPress(digit) {
+    if (pinInput.length >= 4) return;
+    pinInput += digit;
+    updateDots();
+    if (pinInput.length === 4) setTimeout(checkPin, 200);
+  }
+
+  function pinDel() {
+    pinInput = pinInput.slice(0, -1);
+    updateDots();
+    document.getElementById('pin-err').textContent = '';
+  }
+
+  function updateDots(state = 'normal') {
+    for (let i = 0; i < 4; i++) {
+      const dot = document.getElementById('d' + i);
+      dot.className = 'pin-dot';
+      if (state === 'error') dot.classList.add('error');
+      else if (i < pinInput.length) dot.classList.add('filled');
+    }
+  }
+
+  function checkPin() {
+    if (pinInput === CORRECT_PIN) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      unlock();
+    } else {
+      updateDots('error');
+      document.getElementById('pin-err').textContent = 'PIN salah. Coba lagi.';
+      setTimeout(() => {
+        pinInput = '';
+        updateDots();
+        document.getElementById('pin-err').textContent = '';
+      }, 1000);
+    }
+  }
+
+  function unlock() {
+    document.getElementById('pin-screen').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', e => {
+    if (e.key >= '0' && e.key <= '9') pinPress(e.key);
+    if (e.key === 'Backspace') pinDel();
+  });
+
+  // Auto-unlock if already authenticated this session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') unlock();
+
+  // Logout
+  document.getElementById('btn-logout').addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  });
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyAC-EOsxEMJ3sxUuCqVn25Do8jCqSv6T-A",
+    authDomain:        "undangan-thoriq-april.firebaseapp.com",
+    projectId:         "undangan-thoriq-april",
+    storageBucket:     "undangan-thoriq-april.firebasestorage.app",
+    messagingSenderId: "344738743208",
+    appId:             "1:344738743208:web:9885105d67fbc1c377939d",
+    measurementId:     "G-3H30LQM5Y6"
+  };
+
+  let allData = [], activeFilter = 'semua', searchQuery = '';
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  const q = query(collection(db, 'wishes'), orderBy('timestamp', 'desc'));
+  onSnapshot(q,
+    snap => {
+      allData = snap.docs.map(d => ({
+        name: d.data().name || '', text: d.data().text || '',
+        attendance: d.data().attendance || '',
+        timestamp: d.data().timestamp?.toDate?.()?.toISOString() || null
+      }));
+      updateStats(); render();
+    },
+    err => {
+      const el = document.getElementById('fb-status');
+      el.textContent = '⚠️ ' + err.message; el.classList.add('error');
+    }
+  );
+
+  function updateStats() {
+    document.getElementById('stat-total').textContent = allData.length;
+    document.getElementById('stat-hadir').textContent = allData.filter(e => e.attendance==='Hadir').length;
+    document.getElementById('stat-tidak').textContent = allData.filter(e => e.attendance==='Tidak Hadir').length;
+    document.getElementById('stat-ragu').textContent  = allData.filter(e => e.attendance==='Masih Ragu').length;
+  }
+
+  function filtered() {
+    return allData.filter(e => {
+      const mf = activeFilter==='semua' || e.attendance===activeFilter;
+      const q2 = searchQuery.toLowerCase();
+      return mf && (!q2 || e.name.toLowerCase().includes(q2) || e.text.toLowerCase().includes(q2));
+    });
+  }
+
+  const badgeMap = { 'Hadir':'badge-hadir','Tidak Hadir':'badge-tidak-hadir','Masih Ragu':'badge-ragu' };
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const fmt = iso => iso ? new Date(iso).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+
+  function render() {
+    const data = filtered();
+    const c = document.getElementById('table-container');
+    document.getElementById('entry-count').textContent = data.length ? `Menampilkan ${data.length} dari ${allData.length} respons` : '';
+    if (!data.length) { c.innerHTML = '<div class="center-msg"><p>Belum ada respons.</p></div>'; return; }
+    c.innerHTML = `<table><thead><tr><th>Nama</th><th>Kehadiran</th><th>Ucapan</th><th>Waktu</th></tr></thead><tbody>
+      ${data.map(e=>`<tr><td class="td-name">${esc(e.name)}</td><td><span class="badge ${badgeMap[e.attendance]||''}">${e.attendance}</span></td><td class="td-msg">${esc(e.text)}</td><td class="td-date">${fmt(e.timestamp)}</td></tr>`).join('')}
+    </tbody></table>`;
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); activeFilter = b.dataset.filter; render();
+  }));
+
+  document.getElementById('search-input').addEventListener('input', e => { searchQuery = e.target.value; render(); });
+
+  document.getElementById('btn-export').addEventListener('click', () => {
+    const data = filtered();
+    if (!data.length) { alert('Tidak ada data.'); return; }
+    const csv = ['No,Nama,Kehadiran,Ucapan,Waktu',
+      ...data.map((e,i) => `${i+1},"${e.name.replace(/"/g,'""')}","${e.attendance}","${e.text.replace(/"/g,'""')}","${fmt(e.timestamp)}"`)
+    ].join('\n');
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'})), download: `rekap-${new Date().toISOString().slice(0,10)}.csv` });
+    a.click();
+  });
+
+  document.getElementById('btn-print').addEventListener('click', () => window.print());
+</script>
+</body>
+</html>
