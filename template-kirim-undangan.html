@@ -1034,7 +1034,7 @@ Siti Nurhaliza" style="resize:vertical;min-height:80px"></textarea>
     // Save/Update single guest locally
     const saveLocalGuest = (panggilan, name) => {
       const cleanName = name.trim();
-      const docId = `${panggilan.toLowerCase()}_${cleanName.toLowerCase().replace(/\s+/g, "_")}`;
+      const docId = `${cleanName.toLowerCase().replace(/\s+/g, "_")}`;
       const locals = getLocalGuests();
 
       if (locals[docId]) {
@@ -1176,7 +1176,7 @@ Keluarga Besar
       // Attempt Firestore write
       if (db) {
         const cleanName = name.toLowerCase().replace(/\s+/g, "_");
-        const docId = `${title.toLowerCase()}_${cleanName}`;
+        const docId = `${cleanName}`;
         try {
           const docRef = doc(db, "guest_counts", docId);
           await setDoc(docRef, {
